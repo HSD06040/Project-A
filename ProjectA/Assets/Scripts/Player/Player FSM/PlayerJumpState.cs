@@ -24,11 +24,11 @@ public class PlayerJumpState : PlayerState
     {
         base.Update();
 
-        Vector3 move = player.moveDir * player.moveSpeed * Time.deltaTime;
+        Vector3 move = player.camMoveDir * player.moveSpeed * Time.deltaTime;
 
         move.y = player.jumpForce * Time.deltaTime;
 
-        player.charCon.Move(move);
+        player.controller.Move(move);
 
         if (stateTimer < 0)
             stateMachine.ChangeState(player.stateCon.airState);

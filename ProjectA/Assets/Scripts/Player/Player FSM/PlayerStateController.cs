@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerStateController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerStateController : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
     public PlayerAirState airState { get; private set; }
     public PlayerDashState dashState { get; private set; }
+    public PlayerAttackState attackState { get; private set; }
     #endregion
 
     private Player player;
@@ -24,8 +26,9 @@ public class PlayerStateController : MonoBehaviour
         moveState = new PlayerMoveState(player, stateMachine, "Move");
         idleState = new PlayerIdleState(player, stateMachine, "Idle");
         jumpState = new PlayerJumpState(player, stateMachine, "Jump");
-        airState = new PlayerAirState(player, stateMachine, "Air");
+        airState = new PlayerAirState(player, stateMachine, "Jump");
         dashState = new PlayerDashState(player, stateMachine, "Dash");
+        attackState = new PlayerAttackState(player, stateMachine, "Attack");
     }
 
     private void Start()
@@ -37,4 +40,6 @@ public class PlayerStateController : MonoBehaviour
     {
         stateMachine.currentState.Update();
     }
+
+    public void FinishAnimation() => stateMachine.currentState.AnimFinishTrigger();
 }

@@ -14,7 +14,7 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
-        movedir = player.moveDir;
+        movedir = player.camMoveDir;
 
         stateTimer = player.dashDuration;
     }
@@ -28,7 +28,7 @@ public class PlayerDashState : PlayerState
     {
         base.Update();
 
-        player.charCon.Move(movedir * player.moveSpeed * player.dashSpeed * Time.deltaTime);
+        player.controller.Move(movedir * player.moveSpeed * player.dashSpeed * Time.deltaTime);
 
         if (stateTimer < 0)
             stateMachine.ChangeState(player.stateCon.idleState);

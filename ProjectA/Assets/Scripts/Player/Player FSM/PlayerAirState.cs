@@ -32,14 +32,14 @@ public class PlayerAirState : PlayerState
 
     public override void Gravity()
     {
-        float gravityScale = 0.8f;
+        float gravityScale = 1f;
 
         ySpeed += Physics.gravity.y * gravityScale * Time.deltaTime;
 
-        Vector3 move = player.moveDir * player.moveSpeed * Time.deltaTime;
+        Vector3 move = player.camMoveDir * player.moveSpeed * Time.deltaTime;
 
         move.y = ySpeed * Time.deltaTime;
 
-        player.charCon.Move(move);
+        player.controller.Move(move);
     }
 }

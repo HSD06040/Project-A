@@ -11,7 +11,7 @@ public class PlayerIdleState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        player.charCon.Move(Vector3.zero);
+        player.controller.Move(Vector3.zero);
     }
 
     public override void Exit()

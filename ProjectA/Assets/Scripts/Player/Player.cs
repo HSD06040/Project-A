@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class Player : Entity
 {
-    public CharacterController charCon {  get; private set; }
+    public CharacterController controller {  get; private set; }
     public PlayerStateController stateCon {  get; private set; }
+
+    public Vector2 input {  get; private set; }
+    public Vector3 camMoveDir { get; private set; }
+    [SerializeField] private Transform aim;
 
     [Header("Move info")]
     public float moveSpeed;
@@ -15,6 +21,8 @@ public class Player : Entity
     public float dashSpeed;
     public float dashDuration;
 
+    [Header("Roation info")]
+    public float rotSpeed;
 
     [Header("Jump info")]
     public float jumpForce;
@@ -23,7 +31,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-        charCon = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
         stateCon = GetComponent<PlayerStateController>();
     }
 
@@ -36,6 +44,38 @@ public class Player : Entity
     protected override void Update()
     {
         base.Update();
-        moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+
+        if (moveDir.magnitude > 0)
+        {
+            Rotation();
+        }
+    }
+
+    private void Rotation()
+    {
+        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camRight = Camera.main.transform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        camMoveDir = camForward * moveDir.z + camRight * moveDir.x;
+
+        Quaternion targetRotation = Quaternion.LookRotation(camMoveDir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+
+        //float rotation = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
+        //Quaternion targetRotation = Quaternion.Euler(0, rotation, 0);
+
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+    }
+
+    private void OnMove(InputValue value)
+    {
+        input = value.Get<Vector2>();
+        moveDir = new Vector3(input.x, 0, input.y);
     }
 }

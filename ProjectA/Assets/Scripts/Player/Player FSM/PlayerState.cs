@@ -33,7 +33,7 @@ public class PlayerState
 
         Debug.Log(this.GetType().Name);
 
-        
+        player.anim.SetFloat("yVelocity", ySpeed);
     }
 
     public virtual void Exit()
@@ -50,7 +50,7 @@ public class PlayerState
         if (player.IsGround())
             ySpeed = -2;
 
-        player.charCon.Move(Vector3.up * ySpeed * Time.deltaTime);
+        player.controller.Move(Vector3.up * ySpeed * Time.deltaTime);
     }
 }
 
