@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveState : PlayerState
+public class PlayerMoveState : PlayerGroundState
 {
     public PlayerMoveState(Player _player, StateMachine _stateMachine, string _animName) : base(_player, _stateMachine, _animName)
     {
@@ -23,15 +23,15 @@ public class PlayerMoveState : PlayerState
         base.Update();
 
       
-        if(moveDir.sqrMagnitude > 0)
+        if(player.moveDir.sqrMagnitude > 0)
         {
-            player.charCon.Move(moveDir * player.moveSpeed * Time.deltaTime);
+            player.charCon.Move(player.moveDir * player.moveSpeed * Time.deltaTime);
         }
         else
         {
-            stateMachine.ChangeState(player.stateCon.idle);
+            stateMachine.ChangeState(player.stateCon.idleState);
         }
 
-        
+        Gravity();
     }
 }

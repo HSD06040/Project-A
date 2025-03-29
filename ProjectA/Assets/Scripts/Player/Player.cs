@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class Player : Entity
@@ -10,6 +11,14 @@ public class Player : Entity
 
     [Header("Move info")]
     public float moveSpeed;
+    public Vector3 moveDir;
+    public float dashSpeed;
+    public float dashDuration;
+
+
+    [Header("Jump info")]
+    public float jumpForce;
+    public float jumpDuration;
 
     protected override void Awake()
     {
@@ -27,6 +36,6 @@ public class Player : Entity
     protected override void Update()
     {
         base.Update();
-
+        moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
     }
 }

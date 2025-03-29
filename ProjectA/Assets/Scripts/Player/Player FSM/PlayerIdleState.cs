@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerState
+public class PlayerIdleState : PlayerGroundState
 {
     public PlayerIdleState(Player _player, StateMachine _stateMachine, string _animName) : base(_player, _stateMachine, _animName)
     {
@@ -23,7 +23,9 @@ public class PlayerIdleState : PlayerState
     {
         base.Update();
 
-        if (moveDir.sqrMagnitude != 0)
-            stateMachine.ChangeState(player.stateCon.move);
+        if (player.moveDir.sqrMagnitude != 0)
+            stateMachine.ChangeState(player.stateCon.moveState);
+
+        Gravity();
     }
 }

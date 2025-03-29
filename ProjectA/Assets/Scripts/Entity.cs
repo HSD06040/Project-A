@@ -9,6 +9,13 @@ public class Entity : MonoBehaviour
 
     #endregion
 
+    #region Physics
+
+    [SerializeField] private float groundDistance;
+    [SerializeField] private LayerMask ground;
+
+    #endregion
+
     protected virtual void Awake()
     {
         anim = GetComponent<Animator>();
@@ -24,5 +31,12 @@ public class Entity : MonoBehaviour
         
     }
 
+    public bool IsGround() => Physics.Raycast(transform.position, Vector3.down, groundDistance, ground);
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundDistance, 0));
+    }
 }

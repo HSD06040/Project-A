@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class PlayerState
@@ -8,12 +9,10 @@ public class PlayerState
     protected StateMachine stateMachine;
 
     protected string animName;
-
-    protected bool timerUse = false;
     protected float stateTimer;
     protected bool finishTrigger;
 
-    protected Vector3 moveDir;
+    protected float ySpeed = 0;
 
     public PlayerState(Player _player, StateMachine _stateMachine, string _animName)
     {
@@ -30,10 +29,11 @@ public class PlayerState
 
     public virtual void Update()
     {
-        if(timerUse)
-            stateTimer -= Time.deltaTime;
+        stateTimer -= Time.deltaTime;
 
-        moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        Debug.Log(this.GetType().Name);
+
+        
     }
 
     public virtual void Exit()
@@ -42,4 +42,15 @@ public class PlayerState
     }
 
     public void AnimFinishTrigger() => finishTrigger = true;
+
+    public virtual void Gravity()
+    {
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+
+        if (player.IsGround())
+            ySpeed = -2;
+
+        player.charCon.Move(Vector3.up * ySpeed * Time.deltaTime);
+    }
 }
+
