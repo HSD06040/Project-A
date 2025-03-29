@@ -7,42 +7,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
     private static AudioManager audioManager;
+    private static InventoryManager inventoryManager;
 
     #region Managers
-    public static AudioManager Audio
-    {
-        get
-        {
-            if (audioManager == null)
-            {
-                audioManager = FindObjectOfType<AudioManager>();
+    public static AudioManager Audio {  get { return audioManager; } }
+    public static GameManager Instance { get { return instance; } }
+    public static InventoryManager Inventory { get { return inventoryManager; } }
 
-                if (audioManager == null)
-                {
-                    audioManager = CreateManager<AudioManager>();
-                }
-            }
-            return audioManager;
-        }
-        private set => audioManager = value;
-    }
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = FindObjectOfType<GameManager>();
-
-                if (instance == null)
-                {
-                    instance = CreateManager<GameManager>();
-                }
-            }
-            return instance;
-        }
-        private set => instance = value;
-    }
     #endregion
 
     private void Awake()
@@ -52,24 +23,27 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         instance = this;
+        CreateManagers();
         DontDestroyOnLoad(gameObject);
     }
 
     private static T CreateManager<T>() where T : MonoBehaviour
     {
         GameObject go = new GameObject(typeof(T).Name);
-
         if (instance != null)
             go.transform.parent = instance.transform;
-
         T manager = go.AddComponent<T>();
-        DontDestroyOnLoad(go);
         return manager;
     }
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] // 씬 로딩되기전에 실행
+    private void CreateManagers()
+    {
+        audioManager = CreateManager<AudioManager>();
+        inventoryManager = CreateManager<InventoryManager>();
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Initialize()
     {
         _ = Instance;
