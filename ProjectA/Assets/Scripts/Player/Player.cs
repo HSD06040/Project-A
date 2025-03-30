@@ -10,14 +10,14 @@ public class Player : Entity
 {
     public CharacterController controller {  get; private set; }
     public PlayerStateController stateCon {  get; private set; }
+    public CharacterStats stat { get; private set; }
 
     public Vector2 input {  get; private set; }
     public Vector3 camMoveDir { get; private set; }
-    [SerializeField] private Transform aim;
 
     [Header("Move info")]
     public float moveSpeed;
-    public Vector3 moveDir;
+    [HideInInspector] public Vector3 moveDir;
     public float dashSpeed;
     public float dashDuration;
 
@@ -33,12 +33,12 @@ public class Player : Entity
         base.Awake();
         controller = GetComponent<CharacterController>();
         stateCon = GetComponent<PlayerStateController>();
+        stat = GetComponent<CharacterStats>();
     }
 
     protected override void Start()
     {
         base.Start();
-
     }
 
     protected override void Update()
@@ -49,6 +49,8 @@ public class Player : Entity
         {
             Rotation();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            stat.DecreaseHealth(10);
     }
 
     private void Rotation()

@@ -4,18 +4,20 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-public enum ItemRarity
-{
-    Common,
-    UnCommon,
-    Rare,
-    Epic,
-    Unique,
-    Legendary
-}
+
 public class ItemData : ScriptableObject
 {
     public string itemName;
+    public enum ItemRarity
+    {
+        Common,
+        UnCommon,
+        Rare,
+        Epic,
+        Unique,
+        Legendary
+    }
+
     public ItemRarity itemGrade;
     public string itemId;
     public Sprite icon;

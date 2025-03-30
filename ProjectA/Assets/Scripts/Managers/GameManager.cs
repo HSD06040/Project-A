@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    private GameManager() { }
+
     private void Awake()
     {
         if(instance != null)

@@ -25,14 +25,12 @@ public class PlayerMoveState : PlayerGroundState
       
         if(player.moveDir.sqrMagnitude > 0)
         {
-
             player.controller.Move(player.camMoveDir * player.moveSpeed * Time.deltaTime);
-
         }
         else
         {
             stateMachine.ChangeState(player.stateCon.idleState);
-        }
+        }    
 
         Gravity();
     }

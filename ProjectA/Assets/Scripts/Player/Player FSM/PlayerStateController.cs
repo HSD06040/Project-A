@@ -33,7 +33,7 @@ public class PlayerStateController : MonoBehaviour
 
     private void Start()
     {
-        stateMachine.Initialize(moveState);
+        stateMachine.Initialize(idleState);
     }
 
     private void Update()
