@@ -7,7 +7,6 @@ public class InventoryManager : MonoBehaviour
     public Inventory inv;
     public ItemSlot[] inventorySlot;
 
-
     private void Awake()
     {
         FindItemSlots();

@@ -11,12 +11,10 @@ public class Player : Entity
     public CharacterController controller {  get; private set; }
     public PlayerStateController stateCon {  get; private set; }
     public CharacterStats stat { get; private set; }
-
     public Vector2 input {  get; private set; }
     public Vector3 camMoveDir { get; private set; }
 
     [Header("Move info")]
-    public float moveSpeed;
     [HideInInspector] public Vector3 moveDir;
     public float dashSpeed;
     public float dashDuration;

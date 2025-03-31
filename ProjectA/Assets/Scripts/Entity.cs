@@ -16,6 +16,9 @@ public class Entity : MonoBehaviour
 
     #endregion
 
+    [Header("Move info")]
+    public float moveSpeed;
+
     protected virtual void Awake()
     {
         anim = GetComponent<Animator>();
@@ -23,7 +26,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+
     }
 
     protected virtual void Update()

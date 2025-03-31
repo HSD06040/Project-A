@@ -34,10 +34,10 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateHealthUI(int currentHealth)
     {
-        slider.maxValue = DamageStatHandler.Instacne.GetMaxHealth(stat);
+        slider.maxValue = CombatStatCalculator.Instacne.GetMaxHealth(stat);
         slider.value = currentHealth;
 
-        easeSlider.maxValue = DamageStatHandler.Instacne.GetMaxHealth(stat);  
+        easeSlider.maxValue = CombatStatCalculator.Instacne.GetMaxHealth(stat);
     }
 
 }

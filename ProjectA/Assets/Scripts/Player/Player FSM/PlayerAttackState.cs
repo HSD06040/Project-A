@@ -20,7 +20,6 @@ public class PlayerAttackState : PlayerState
             comboCount = 0;
 
         player.anim.SetInteger("ComboCount", comboCount);
-        Debug.Log(comboCount);
     }
 
     public override void Exit()

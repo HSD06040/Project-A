@@ -20,7 +20,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.6875
   m_HasExitTime: 0
@@ -76,7 +76,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions:
   - first: {fileID: -3577885088448840056}
     second:
-    - {fileID: -4511811231367060245}
+    - {fileID: -4238987819639601565}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -80, y: -60, z: 0}
   m_EntryPosition: {x: 200, y: 90, z: 0}
@@ -150,7 +150,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1109 &-4511811231367060245
+--- !u!1109 &-4238987819639601565
 AnimatorTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,10 +162,10 @@ AnimatorTransition:
     m_ConditionEvent: Attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -183618934331286923}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
-  m_IsExit: 0
+  m_IsExit: 1
   serializedVersion: 1
 --- !u!1107 &-3577885088448840056
 AnimatorStateMachine:
@@ -540,7 +540,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.01
   m_HasExitTime: 0
@@ -670,7 +670,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.1
   m_HasExitTime: 0
@@ -698,7 +698,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.9464286
   m_HasExitTime: 0

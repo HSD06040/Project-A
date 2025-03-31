@@ -44,11 +44,4 @@ public class GameManager : MonoBehaviour
         audioManager = CreateManager<AudioManager>();
         inventoryManager = CreateManager<InventoryManager>();
     }
-
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void Initialize()
-    {
-        _ = Instance;
-        _ = Audio;
-    }
 }

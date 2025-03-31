@@ -33,12 +33,12 @@ public class CharacterStats : MonoBehaviour
 
     private void Start()
     {
-        CurrentHealth = DamageStatHandler.Instacne.GetMaxHealth(this);
+        CurrentHealth = CombatStatCalculator.Instacne.GetMaxHealth(this);
     }
 
     public void DoDamage(CharacterStats enemyStat, float attackPower = 1)
     {
-        DamageStatHandler.Instacne.CalculateTotalDamage(this, enemyStat, attackPower);
+        CombatStatCalculator.Instacne.CalculateTotalDamage(this, enemyStat, attackPower);
     }
 
     public void DecreaseHealth(int amount)

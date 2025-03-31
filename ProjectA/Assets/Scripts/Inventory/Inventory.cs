@@ -10,6 +10,15 @@ public class Inventory
 
     public void AddToInventory(ItemData _data)
     {
-
+        if(inventoryDictionary.TryGetValue(_data, out InventoryItem item))
+        {
+            item.AddStack();
+        }
+        else
+        {
+            InventoryItem newItem = new InventoryItem(_data);
+            inventoryDictionary.Add(_data, newItem);
+            inventory.Add(newItem);
+        }
     }
 }
