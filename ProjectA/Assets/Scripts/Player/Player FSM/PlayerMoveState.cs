@@ -30,7 +30,10 @@ public class PlayerMoveState : PlayerGroundState
         else
         {
             stateMachine.ChangeState(player.stateCon.idleState);
-        }    
+        }
+
+        if (!player.IsGround())
+            stateMachine.ChangeState(player.stateCon.airState);
 
         Gravity();
     }

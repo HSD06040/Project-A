@@ -13,6 +13,8 @@ public class PlayerJumpState : PlayerState
         base.Enter();
 
         stateTimer = player.jumpDuration;
+
+        ySpeed = player.jumpForce;
     }
 
     public override void Exit()
@@ -26,11 +28,16 @@ public class PlayerJumpState : PlayerState
 
         Vector3 move = player.camMoveDir * player.moveSpeed * Time.deltaTime;
 
-        move.y = player.jumpForce * Time.deltaTime;
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+
+        move.y = player.jumpForce * ySpeed * Time.deltaTime;
 
         player.controller.Move(move);
 
         if (stateTimer < 0)
+        {
+            ySpeed = player.jumpForce * 0.5f;
             stateMachine.ChangeState(player.stateCon.airState);
+        }
     }
 }

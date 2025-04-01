@@ -8,36 +8,31 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     [SerializeField] private Slider easeSlider;
-    [SerializeField] private float lerpSpeed = 2;
+    [SerializeField] private float lerpSpeed = 0.05f;
     [SerializeField] private CharacterStats stat;
 
-    private void Start()
-    {
-
-    }
-
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         stat.OnHealthChanged += UpdateHealthUI;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         stat.OnHealthChanged -= UpdateHealthUI;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (slider.value != easeSlider.value)
             easeSlider.value = Mathf.Lerp(easeSlider.value, stat.CurrentHealth, lerpSpeed);
     }
 
-    private void UpdateHealthUI(int currentHealth)
+    protected virtual void UpdateHealthUI(int currentHealth)
     {
-        slider.maxValue = CombatStatCalculator.Instacne.GetMaxHealth(stat);
+        slider.maxValue = GameManager.Calculator.GetMaxHealth(stat);
         slider.value = currentHealth;
 
-        easeSlider.maxValue = CombatStatCalculator.Instacne.GetMaxHealth(stat);
+        easeSlider.maxValue = GameManager.Calculator.GetMaxHealth(stat);
     }
 
 }

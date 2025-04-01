@@ -8,12 +8,13 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     private static AudioManager audioManager;
     private static InventoryManager inventoryManager;
+    private static CombatStatCalculator calculator;
 
     #region Managers
     public static AudioManager Audio {  get { return audioManager; } }
     public static GameManager Instance { get { return instance; } }
     public static InventoryManager Inventory { get { return inventoryManager; } }
-
+    public static CombatStatCalculator Calculator { get { return calculator; } }
     #endregion
 
     private GameManager() { }
@@ -43,5 +44,6 @@ public class GameManager : MonoBehaviour
     {
         audioManager = CreateManager<AudioManager>();
         inventoryManager = CreateManager<InventoryManager>();
+        calculator = CreateManager<CombatStatCalculator>();
     }
 }

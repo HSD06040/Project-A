@@ -3,21 +3,18 @@ using UnityEngine;
 
 public class SlimeBT : EnemyBT
 {
-    [SerializeField] private GameObject[] wayPonts;
-
-    public SlimeBT(Enemy enemy) : base(enemy)
+    private Transform target;
+    
+    public void SetUp(Transform target,GameObject[] wayPoints)
     {
-    }
+        this.target = target;
 
-    public void SetUp(GameObject[] wayPoints)
-    {
         behaviorAgent.SetVariableValue("Patrol", wayPoints.ToList());
-        behaviorAgent.SetVariableValue("Speed", enemy.moveSpeed);
+        behaviorAgent.SetVariableValue("Target", this.target.gameObject);
     }
 
     protected override void Start()
     {
         base.Start();
-        SetUp(wayPonts);
     }
 }

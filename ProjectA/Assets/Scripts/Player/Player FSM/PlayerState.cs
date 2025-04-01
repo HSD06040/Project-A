@@ -45,8 +45,6 @@ public class PlayerState
 
     public virtual void Gravity()
     {
-        ySpeed += Physics.gravity.y * Time.deltaTime;
-
         if (player.IsGround())
             ySpeed = -2;
 

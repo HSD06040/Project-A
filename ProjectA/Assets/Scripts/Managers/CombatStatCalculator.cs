@@ -20,23 +20,6 @@ public class CombatStatCalculator : MonoBehaviour
     //Заїо
     private int luckCritChance = 1;
 
-    private static WeakReference<CombatStatCalculator> instance;
-
-    private CombatStatCalculator() { }
-
-    public static CombatStatCalculator Instacne {
-        get
-        {
-            if(instance == null || instance.TryGetTarget(out CombatStatCalculator singleton))
-            {
-                singleton = new CombatStatCalculator();
-                instance= new WeakReference<CombatStatCalculator>(singleton);
-            }
-
-            return singleton;
-        } 
-    }
-
     public void CalculateTotalDamage(CharacterStats myStats, CharacterStats enemyStats, float attackPower)
     {
         float totalDamage;
