@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateController : MonoBehaviour
 {
+    public bool isKnockBack = false;
+    public bool isHitting = false;
+
     #region State
     private StateMachine stateMachine;
     public PlayerMoveState moveState {  get; private set; }
@@ -14,6 +17,8 @@ public class PlayerStateController : MonoBehaviour
     public PlayerAirState airState { get; private set; }
     public PlayerDashState dashState { get; private set; }
     public PlayerAttackState attackState { get; private set; }
+    public PlayerHitState hitState { get; private set; }
+    public PlayerKnockBackState knockBackState { get; private set; }
     #endregion
 
     private Player player;
@@ -29,6 +34,8 @@ public class PlayerStateController : MonoBehaviour
         airState = new PlayerAirState(player, stateMachine, "Jump");
         dashState = new PlayerDashState(player, stateMachine, "Dash");
         attackState = new PlayerAttackState(player, stateMachine, "Attack");
+        hitState = new PlayerHitState(player, stateMachine, "Hit");
+        knockBackState = new PlayerKnockBackState(player, stateMachine, "KnockBack");
     }
 
     private void Start()
@@ -39,6 +46,27 @@ public class PlayerStateController : MonoBehaviour
     private void Update()
     {
         stateMachine.currentState.Update();
+    }
+
+    public void HitPlayer()
+    {
+        if (isHitting)
+            return;
+
+        if (isKnockBack)
+            stateMachine.ChangeState(knockBackState);
+        else
+            stateMachine.ChangeState(hitState);
+    }
+
+    public void SetupKnockBackBool(bool isKnockBack,Transform enemy)
+    {
+        this.isKnockBack = isKnockBack;
+
+        if (this.isKnockBack)
+            player.knockBackDir = (transform.position - enemy.position).normalized;
+
+        HitPlayer();
     }
 
     public void FinishAnimation() => stateMachine.currentState.AnimFinishTrigger();

@@ -4,7 +4,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-
+[CreateAssetMenu(fileName = "newItemData",menuName ="Data")]
 public class ItemData : ScriptableObject
 {
     public string itemName;
@@ -21,6 +21,8 @@ public class ItemData : ScriptableObject
     public ItemRarity itemGrade;
     public string itemId;
     public Sprite icon;
+    public Mesh itemMesh;
+    public Material itemMaterial;
 
     [TextArea]
     public string itemDescription;

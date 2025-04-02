@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerAirState : PlayerState
 {
-    private float gravity = 2f;
+    private Vector3 airMove;
+    private float gravityMultiplier = 2f;
 
     public PlayerAirState(Player _player, StateMachine _stateMachine, string _animName) : base(_player, _stateMachine, _animName)
     {
@@ -13,32 +14,23 @@ public class PlayerAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
-        ySpeed = 0;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 
     public override void Update()
     {
         base.Update();
 
-        Gravity();
+        airMove.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+
+        player.controller.Move(airMove * Time.deltaTime);
 
         if (player.IsGround())
+        {
             stateMachine.ChangeState(player.stateCon.idleState);
+        }
     }
-
-    public override void Gravity()
+    public void SetAirMove(Vector3 jumpDirection)
     {
-        ySpeed += Physics.gravity.y * gravity * Time.deltaTime;
-
-        Vector3 move = player.camMoveDir * player.moveSpeed * Time.deltaTime;
-        move.y = ySpeed * Time.deltaTime;
-
-        player.controller.Move(move);
+        airMove = jumpDirection;
     }
 }

@@ -31,7 +31,7 @@ public class CharacterStats : MonoBehaviour
 
     public event Action<int> OnHealthChanged;
 
-    private void Start()
+    protected virtual void Start()
     {
         CurrentHealth = GameManager.Calculator.GetMaxHealth(this);
     }
@@ -44,7 +44,7 @@ public class CharacterStats : MonoBehaviour
     public void DecreaseHealth(int amount)
     {
         CurrentHealth -= amount;
-
+        Debug.Log(CurrentHealth);
         if(curHP <= 0)
         {
             Die();

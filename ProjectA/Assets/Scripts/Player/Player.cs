@@ -26,6 +26,10 @@ public class Player : Entity
     public float jumpForce;
     public float jumpDuration;
 
+    [Header("KnockBack info")]
+    public float knockBackForce;
+    public Vector3 knockBackDir;
+
     protected override void Awake()
     {
         base.Awake();
@@ -53,6 +57,9 @@ public class Player : Entity
 
     private void Rotation()
     {
+        if (stateCon.isHitting)
+            return;
+
         Vector3 camForward = Camera.main.transform.forward;
         Vector3 camRight = Camera.main.transform.right;
 

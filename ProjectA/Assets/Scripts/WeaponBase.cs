@@ -10,15 +10,12 @@ public class WeaponBase : MonoBehaviour
         player = GetComponentInParent<Player>();
     }
 
-    private void OnTriggerEnter(Collider cd)
+    private void OnTriggerEnter(Collider target)
     {
-        if(cd.CompareTag("Enemy"))
+        if(target.CompareTag("Enemy"))
         {
-            Debug.Log("1");
-            CharacterStats stat = cd.GetComponent<CharacterStats>();
-            Debug.Log("2");
+            CharacterStats stat = target.GetComponent<CharacterStats>();
             player.stat.DoDamage(stat, 1 + (player.stateCon.attackState.comboCount == 0 ? 0 : player.stateCon.attackState.comboCount / 5));
-            Debug.Log("3");
         }
     }
 }

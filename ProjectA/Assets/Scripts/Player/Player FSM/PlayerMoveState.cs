@@ -33,7 +33,21 @@ public class PlayerMoveState : PlayerGroundState
         }
 
         if (!player.IsGround())
+        {
+            Vector3 jumpMove = Vector3.zero;
+
+            Vector3 inputDir = player.camMoveDir.normalized;
+
+            if (player.moveDir.sqrMagnitude > 0.01f)
+            {
+                jumpMove.x = inputDir.x * player.moveSpeed;
+                jumpMove.z = inputDir.z * player.moveSpeed;
+            }
+            jumpMove.y = player.jumpForce;
+
             stateMachine.ChangeState(player.stateCon.airState);
+            player.stateCon.airState.SetAirMove(jumpMove);
+        }
 
         Gravity();
     }

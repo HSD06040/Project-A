@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerState
 {
+    private Vector3 jumpMove;
+
     public PlayerJumpState(Player _player, StateMachine _stateMachine, string _animName) : base(_player, _stateMachine, _animName)
     {
     }
@@ -14,29 +16,30 @@ public class PlayerJumpState : PlayerState
 
         stateTimer = player.jumpDuration;
 
-        ySpeed = player.jumpForce;
-    }
+        jumpMove = Vector3.zero;
 
-    public override void Exit()
-    {
-        base.Exit();
+        Vector3 inputDir = player.camMoveDir.normalized;
+
+        if (player.moveDir.sqrMagnitude > 0.01f)
+        {
+            jumpMove.x = inputDir.x * player.moveSpeed;
+            jumpMove.z = inputDir.z * player.moveSpeed;
+        }
+
+        jumpMove.y = player.jumpForce;
     }
 
     public override void Update()
     {
         base.Update();
 
-        Vector3 move = player.camMoveDir * player.moveSpeed * Time.deltaTime;
+        jumpMove.y += Physics.gravity.y * Time.deltaTime;
 
-        ySpeed += Physics.gravity.y * Time.deltaTime;
+        player.controller.Move(jumpMove * Time.deltaTime);
 
-        move.y = player.jumpForce * ySpeed * Time.deltaTime;
-
-        player.controller.Move(move);
-
-        if (stateTimer < 0)
+        if (stateTimer <= 0)
         {
-            ySpeed = player.jumpForce * 0.5f;
+            player.stateCon.airState.SetAirMove(jumpMove);
             stateMachine.ChangeState(player.stateCon.airState);
         }
     }

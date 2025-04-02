@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
     [SerializeField] private Slider easeSlider;
+    [SerializeField] private Slider slider;
     [SerializeField] private float lerpSpeed = 0.05f;
     [SerializeField] private CharacterStats stat;
 
