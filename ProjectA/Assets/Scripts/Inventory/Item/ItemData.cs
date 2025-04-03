@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -5,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "newItemData",menuName ="Data")]
-public class ItemData : ScriptableObject
+public class ItemData : ScriptableObject, IEquatable<ItemData>
 {
     public string itemName;
     public enum ItemRarity
@@ -19,7 +20,7 @@ public class ItemData : ScriptableObject
     }
 
     public ItemRarity itemGrade;
-    public string itemId;
+    public string itemID;
     public Sprite icon;
     public Mesh itemMesh;
     public Material itemMaterial;
@@ -48,12 +49,27 @@ public class ItemData : ScriptableObject
     {
 #if UNITY_EDITOR
         string path = AssetDatabase.GetAssetPath(this);
-        itemId = AssetDatabase.AssetPathToGUID(path);
+        itemID = AssetDatabase.AssetPathToGUID(path);
 #endif
     }
 
     public virtual string GetDescription()
     {
         return "";
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is ItemData other && Equals(other);
+    }
+    public bool Equals(ItemData other)
+    {
+        if (other == null) return false;
+        return itemID == other.itemID;
+    }
+
+    public override int GetHashCode()
+    {
+        return itemID != null ? itemID.GetHashCode() : 0;
     }
 }

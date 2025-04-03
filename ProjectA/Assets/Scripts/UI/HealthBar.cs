@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Slider easeSlider;
     [SerializeField] private Slider slider;
     [SerializeField] private float lerpSpeed = 0.05f;
-    [SerializeField] private CharacterStats stat;
+    [SerializeField] protected CharacterStats stat;
 
     protected virtual void OnEnable()
     {

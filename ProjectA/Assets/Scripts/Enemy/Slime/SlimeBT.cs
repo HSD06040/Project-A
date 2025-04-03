@@ -4,7 +4,7 @@ using UnityEngine;
 public class SlimeBT : EnemyBT
 {
     private Transform target;
-    
+
     public void SetUp(Transform target,GameObject[] wayPoints)
     {
         this.target = target;

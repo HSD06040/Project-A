@@ -4,17 +4,21 @@ using UnityEngine;
 public class EnemyStats : CharacterStats
 {
     private EnemyDropTable dropTable;
+    private CapsuleCollider cd;
 
     protected override void Start()
     {
         base.Start();
 
         dropTable = GetComponent<EnemyDropTable>();
+        cd = GetComponent<CapsuleCollider>();
     }
 
     protected override void Die()
     {
         base.Die();
+
+        cd.enabled = false;
 
         for (int i = 0; i < dropTable.dropItems.Length; i++)
         {

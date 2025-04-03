@@ -18,6 +18,17 @@ public class CharacterStats : MonoBehaviour
     public Stat vitality;   // 최대체력 + 방어력
     public Stat luck;       // 모든확률에 부가 (크리티컬 확률 포함)
 
+    private bool isAlive;
+    public bool IsAlive
+    {
+        get => isAlive;
+        set
+        {
+            isAlive = value;
+            OnPlayerDead?.Invoke();
+        }
+    }
+
     private int curHP;
     public int CurrentHealth 
     {  
@@ -29,6 +40,7 @@ public class CharacterStats : MonoBehaviour
        }
     }
 
+    public event Action OnPlayerDead;
     public event Action<int> OnHealthChanged;
 
     protected virtual void Start()
@@ -44,6 +56,7 @@ public class CharacterStats : MonoBehaviour
     public void DecreaseHealth(int amount)
     {
         CurrentHealth -= amount;
+
         Debug.Log(CurrentHealth);
         if(curHP <= 0)
         {
@@ -53,6 +66,6 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Die()
     {
-        
+        IsAlive = true;
     }
 }
