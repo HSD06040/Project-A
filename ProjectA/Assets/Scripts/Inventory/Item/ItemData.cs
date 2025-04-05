@@ -5,7 +5,13 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "newItemData",menuName ="Data")]
+public enum ItemType 
+{   
+    Use,
+    Equipment 
+}
+
+[CreateAssetMenu(fileName = "newItemData",menuName ="Data/ItemData")]
 public class ItemData : ScriptableObject, IEquatable<ItemData>
 {
     public string itemName;
@@ -19,6 +25,7 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
         Legendary
     }
 
+    public ItemType itemType;
     public ItemRarity itemGrade;
     public string itemID;
     public Sprite icon;
@@ -53,7 +60,7 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
 #endif
     }
 
-    public virtual string GetDescription()
+    public virtual string GetStatDescription()
     {
         return "";
     }

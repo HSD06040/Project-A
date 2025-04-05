@@ -1,25 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
     public Inventory inv;
     public ItemSlot[] inventorySlot;
+    public Equipment_Slot[] equipmentSlot;
 
     private void Awake()
     {
         FindItemSlots();
+
         inv = new Inventory();
+
+        inv.inventory           = new List<InventoryItem>(inventorySlot.Length);
         inv.inventoryDictionary = new Dictionary<ItemData, InventoryItem> (inventorySlot.Length);
+        inv.equipment           = new List<InventoryItem> (equipmentSlot.Length);
+        inv.equipmentDictionary = new Dictionary<ItemData_Equipment, InventoryItem>(equipmentSlot.Length);
+
+        UpdateSlotUI();
     }
 
     public void FindItemSlots()
     {
-        Transform parent = GameObject.Find("InventoryPanel")?.transform;
+        Transform parent = GameManager.UI.inventoryPanel.gameObject.transform;
 
         if (parent != null)
-            inventorySlot = parent.GetComponentsInChildren<ItemSlot>();
+        {
+            inventorySlot = parent.GetComponentsInChildren<ItemSlot>()
+                      .Where(slot => slot.GetType() == typeof(ItemSlot))
+                      .ToArray();
+            equipmentSlot = parent.GetComponentsInChildren<Equipment_Slot>();
+        }
     }
 
     public void AddItem(ItemData _data)
@@ -46,7 +60,20 @@ public class InventoryManager : MonoBehaviour
     }
     public void UpdateSlotUI()
     {
+        for (int i = 0; i < equipmentSlot.Length; i++)
+        {
+            foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in inv.equipmentDictionary)
+            {
+                if (item.Key.equipType == equipmentSlot[i].slotType)
+                    equipmentSlot[i].UpdateSlot(item.Value);
+            }
+        }      
+
         for (int i = 0; i < inventorySlot.Length; i++)
+        {
+            inventorySlot[i].ClearSlot();
+        }
+        for (int i = 0; i < inv.inventory.Count; i++)
         {
             inventorySlot[i].UpdateSlot(inv.inventory[i]);
         }

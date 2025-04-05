@@ -1,23 +1,24 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
-    [SerializeField] private ItemData itemData;
+    public ItemData itemData;
     private MeshFilter filter;
-    private MeshRenderer renderer;
+    private MeshRenderer itemRenderer;
     private Rigidbody rb;
 
     private void Awake()
     {
         filter = GetComponent<MeshFilter>();
-        renderer = GetComponent<MeshRenderer>();
+        itemRenderer = GetComponent<MeshRenderer>();
         rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        rb.AddForce(new Vector3(Random.Range(-3, 3), Random.Range(6, 10), Random.Range(-3, 3)), ForceMode.Impulse);
-        rb.AddTorque(Random.insideUnitSphere * 1f, ForceMode.Impulse);
+        rb.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(3, 6), Random.Range(-2, 2)), ForceMode.Impulse);
+        rb.AddTorque(Random.insideUnitSphere * .3f, ForceMode.Impulse);
     }
 
     public void SetupItemObejct(ItemData data)
@@ -25,6 +26,12 @@ public class ItemObject : MonoBehaviour
         itemData = data;
 
         filter.mesh = itemData.itemMesh;
-        renderer.material = itemData.itemMaterial;
+        itemRenderer.material = itemData.itemMaterial;
+    }
+
+    public void PickupItem()
+    {
+        GameManager.Inventory.AddItem(itemData);
+        Destroy(gameObject);
     }
 }

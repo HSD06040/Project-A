@@ -1,24 +1,11 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerTrigger : MonoBehaviour
 {
-    [SerializeField] private BoxCollider weaponColider;
+    private PlayerStats stat;
 
-    public void WeaponColiderTrue()
+    private void Start()
     {
-        weaponColider.enabled = true;
-        StartCoroutine(WaitWeaponColiderFalse(.5f));
-
-    }
-    public void WeaponColiderFalse()
-    {
-        weaponColider.enabled = false;
-    }
-
-    private IEnumerator WaitWeaponColiderFalse(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        WeaponColiderFalse();
+        stat = GetComponent<PlayerStats>();
     }
 }

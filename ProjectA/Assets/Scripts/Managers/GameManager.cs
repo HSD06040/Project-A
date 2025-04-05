@@ -9,12 +9,18 @@ public class GameManager : MonoBehaviour
     private static AudioManager audioManager;
     private static InventoryManager inventoryManager;
     private static CombatStatCalculator calculator;
+    private static UI_Manager uiManager;
+    private static DataManager dataManager;
+    private static EquipmentManager equipmentManager;
 
     #region Managers
     public static AudioManager Audio {  get { return audioManager; } }
     public static GameManager Instance { get { return instance; } }
     public static InventoryManager Inventory { get { return inventoryManager; } }
     public static CombatStatCalculator Calculator { get { return calculator; } }
+    public static UI_Manager UI {  get { return uiManager; } }
+    public static DataManager Data { get { return dataManager; } }
+    public static EquipmentManager Equip { get { return equipmentManager; } }
     #endregion
 
     private GameManager() { }
@@ -42,8 +48,11 @@ public class GameManager : MonoBehaviour
 
     private void CreateManagers()
     {
+        uiManager = CreateManager<UI_Manager>();
+        dataManager = CreateManager<DataManager>();
         audioManager = CreateManager<AudioManager>();
         inventoryManager = CreateManager<InventoryManager>();
         calculator = CreateManager<CombatStatCalculator>();
+        equipmentManager = CreateManager<EquipmentManager>();
     }
 }

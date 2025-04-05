@@ -57,7 +57,6 @@ public class CharacterStats : MonoBehaviour
     {
         CurrentHealth -= amount;
 
-        Debug.Log(CurrentHealth);
         if(curHP <= 0)
         {
             Die();

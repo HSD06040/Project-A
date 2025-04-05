@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AppUI.Core;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,7 +30,9 @@ public class Player : Entity
     [Header("KnockBack info")]
     public float knockBackForce;
     public Vector3 knockBackDir;
+    [Space]
 
+    [SerializeField] private LayerMask enemy;
     protected override void Awake()
     {
         base.Awake();
@@ -80,9 +83,48 @@ public class Player : Entity
         //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
     }
 
+    /// <summary>
+    /// 가장 가까운 적에게 회전하면서 다가간다.
+    /// </summary>
+    public void ApproachClosestEnemy()
+    {
+        Transform enemyTransform = Utils.FindClosestEnemy(transform, 2f, enemy);
+
+        if (enemyTransform == null)
+            return;
+
+        StartCoroutine(MoveTowardsEnemy(enemyTransform));
+    }
+
+    /// <summary>
+    /// 회전하면서 다가가는 코루틴
+    /// </summary>
+    private IEnumerator MoveTowardsEnemy(Transform enemyTransform)
+    {
+        while (Vector3.Distance(transform.position, enemyTransform.position) > .7f)
+        {
+            if (enemyTransform == null) break;
+
+            Vector3 dir = (enemyTransform.position - transform.position).normalized;
+
+            Quaternion targetRotation = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
+
+            controller.Move(dir * Time.deltaTime * 10);
+
+            yield return null;
+        }
+    }
+
     private void OnMove(InputValue value)
     {
         input = value.Get<Vector2>();
         moveDir = new Vector3(input.x, 0, input.y);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 2);
     }
 }

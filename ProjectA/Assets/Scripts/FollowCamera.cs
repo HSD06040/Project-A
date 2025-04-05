@@ -9,7 +9,6 @@ using UnityEngine.TextCore.Text;
 public class FollowCamera : MonoBehaviour
 {
     [SerializeField] private Transform cameraBoom;
-    [SerializeField] private Transform lookPoint;
     [SerializeField] private float mouseSensitivity;
     [SerializeField] private CinemachineVirtualCamera vCam;
 
@@ -25,13 +24,13 @@ public class FollowCamera : MonoBehaviour
 
     private void OnEnable()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         curZoom = vCam.m_Lens.FieldOfView;
     }
 
     private void OnDisable()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
     }
 
     private void LateUpdate()

@@ -15,6 +15,7 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.ApproachClosestEnemy();
 
         if (comboCount > 2 || Time.time >= lastAttackTimer + resetTimer)
             comboCount = 0;
@@ -22,6 +23,7 @@ public class PlayerAttackState : PlayerState
         stateTimer = .3f;
 
         player.anim.SetInteger("ComboCount", comboCount);
+
     }
 
     public override void Exit()
@@ -43,12 +45,5 @@ public class PlayerAttackState : PlayerState
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
             stateMachine.ChangeState(player.stateCon.dashState);
-
-        if (stateTimer < 0 && Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            player.anim.SetBool("Attack",false);
-            Debug.Log("1");
-            Enter();
-        }
     }
 }
