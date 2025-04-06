@@ -77,5 +77,7 @@ public class InventoryManager : MonoBehaviour
         {
             inventorySlot[i].UpdateSlot(inv.inventory[i]);
         }
+
+        GameManager.UI.inventoryPanel.status.UpdateStatusUI();
     }
 }

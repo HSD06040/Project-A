@@ -29,10 +29,10 @@ public class HealthBar : MonoBehaviour
 
     protected virtual void UpdateHealthUI(int currentHealth)
     {
-        slider.maxValue = GameManager.Calculator.GetMaxHealth(stat);
+        slider.maxValue = GameManager.Calculator.GetMaxHealth(stat.maxHealth.GetValue(),stat.vitality.GetValue(),stat.strength.GetValue());
         slider.value = currentHealth;
 
-        easeSlider.maxValue = GameManager.Calculator.GetMaxHealth(stat);
+        easeSlider.maxValue = GameManager.Calculator.GetMaxHealth(stat.maxHealth.GetValue(), stat.vitality.GetValue(), stat.strength.GetValue());
     }
 
 }

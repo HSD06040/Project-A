@@ -16,7 +16,7 @@ public enum StatType
 }
 public enum EquipmentType
 {
-    Weapon, Ring1, Ring2, Ring3
+    Weapon, LeftRing, RightRing, Artifact
 }
 
 [Serializable]
@@ -95,5 +95,26 @@ public class ItemData_Equipment : ItemData
         {
             GameManager.Data.playerStatData.GetStat(modifier.Type).RemoveModifier(modifier.value);
         }
+    }
+
+    public int GetMaxHealth()
+    {
+        int maxHealth = 0;
+        int vitality  = 0;
+        int strength  = 0;
+        
+        foreach(var modifier in statModifiers)
+        {
+            if(modifier.Type == StatType.MaxHealth)
+                maxHealth = modifier.value;
+
+            if(modifier.Type == StatType.Vitality)
+                vitality = modifier.value;
+
+            if(modifier.Type == StatType.Strength)
+                strength = modifier.value;
+        }
+
+        return GameManager.Calculator.GetMaxHealth(maxHealth, vitality, strength);
     }
 }

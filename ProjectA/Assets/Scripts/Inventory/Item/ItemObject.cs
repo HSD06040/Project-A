@@ -17,7 +17,7 @@ public class ItemObject : MonoBehaviour
 
     private void Start()
     {
-        rb.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(3, 6), Random.Range(-2, 2)), ForceMode.Impulse);
+        rb.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(6, 10), Random.Range(-2, 2)), ForceMode.Impulse);
         rb.AddTorque(Random.insideUnitSphere * .3f, ForceMode.Impulse);
     }
 

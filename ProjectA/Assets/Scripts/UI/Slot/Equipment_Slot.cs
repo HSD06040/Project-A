@@ -13,10 +13,4 @@ public class Equipment_Slot : ItemSlot
         ClearSlot();
         toolTip.CloseToolTip();
     }
-    public override void ClearSlot()
-    {
-        base.ClearSlot();
-
-        item = null;
-    }
 }

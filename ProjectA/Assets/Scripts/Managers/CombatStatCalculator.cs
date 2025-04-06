@@ -22,17 +22,19 @@ public class CombatStatCalculator : MonoBehaviour
 
     public void CalculateTotalDamage(CharacterStats myStats, CharacterStats enemyStats, float attackPower)
     {
+        bool isCrit = false;
         float totalDamage;
 
         totalDamage = GetDamage(myStats) * attackPower;
 
         if (CanCrit(myStats))
         {
+            isCrit = true;
             totalDamage *= (GetCritDamage(myStats) / 100);
         }
         totalDamage = CheckTargetDefense(totalDamage, enemyStats);
 
-        enemyStats.DecreaseHealth((int)totalDamage);
+        enemyStats.DecreaseHealth((int)totalDamage,isCrit);
     }
 
     public bool CanCrit(CharacterStats myStats)
@@ -64,10 +66,9 @@ public class CombatStatCalculator : MonoBehaviour
                stats.vitality.GetValue() * vitDefense;
     }
 
-    public int GetMaxHealth(CharacterStats stats)
+    public int GetMaxHealth(int maxHealth, int vitality, int strength)
     {
-        return stats.maxHealth.GetValue() +
-               stats.vitality.GetValue() * vitMaxHealth + stats.strength.GetValue() * strMaxHealth;
+        return maxHealth + (vitality * vitMaxHealth) + (strength * strMaxHealth);
     }
 
     public int GetCritChance(CharacterStats stats)

@@ -38,11 +38,12 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    public virtual void ClearSlot()
+    public void ClearSlot()
     {
         icon.color = Color.clear;
         icon.sprite = null;
         itemStack.text = "";
+        item = null;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

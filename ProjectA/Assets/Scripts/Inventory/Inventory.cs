@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,12 @@ public class Inventory
         
         if (inventoryDictionary.TryGetValue(_data, out InventoryItem item))
         {
+            if(item.data.itemType == ItemType.Equipment)
+            {
+                InventoryItem newItem = new InventoryItem(_data);
+                inventory.Add(newItem);
+                return;
+            }
             item.AddStack();
         }
         else

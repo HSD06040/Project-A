@@ -54,8 +54,6 @@ public class Player : Entity
         {
             Rotation();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            stat.DecreaseHealth(10);
     }
 
     private void Rotation()

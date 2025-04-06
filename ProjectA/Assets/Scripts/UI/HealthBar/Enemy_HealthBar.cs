@@ -27,7 +27,11 @@ public class Enemy_HealthBar : HealthBar
     protected override void Update()
     {
         base.Update();
+        Billboard();
+    }
 
+    private void Billboard()
+    {
         if (mainCam != null)
         {
             Vector3 dir = (transform.position - mainCam.transform.position).normalized;

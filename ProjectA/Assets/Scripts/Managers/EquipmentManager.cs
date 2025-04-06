@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class EquipmentManager : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class EquipmentManager : MonoBehaviour
         GameManager.Inventory.inv.equipmentDictionary.Add(item, newItem);
         item.AddModifiers();
         GameManager.Inventory.RemoveItem(item);
+        GameManager.Data.playerStatData.IncreaseHealth(item.GetMaxHealth());
     }
 
 
@@ -50,6 +52,7 @@ public class EquipmentManager : MonoBehaviour
             GameManager.Inventory.inv.equipmentDictionary.Remove(itemToRomove);
             itemToRomove.RemoveModifiers();
             GameManager.Inventory.AddItem(itemToRomove);
+            GameManager.Data.playerStatData.DecreaseHealth(itemToRomove.GetMaxHealth());
         }
         
     }

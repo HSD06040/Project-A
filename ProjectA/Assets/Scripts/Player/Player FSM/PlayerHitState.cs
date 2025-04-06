@@ -68,5 +68,7 @@ public class PlayerKnockBackState : PlayerState
 
         if(isKnockBack)
             player.controller.Move(player.knockBackDir * player.knockBackForce * Time.deltaTime);
+
+        player.controller.Move(Vector3.up * -1 * Time.deltaTime);
     }
 }
