@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa645905810916418c34420f372ba05, type: 3}
+  m_Name: RuneSword 1
+  m_EditorClassIdentifier: 
+  itemName: "\uB179\uC0C9 \uB8EC \uC18C\uB4DC"
+  itemType: 1
+  itemGrade: 3
+  itemID: 8a07a91246a2331448fe2df752e2433e
+  icon: {fileID: 21300000, guid: 97d95e9aeb13f314da49aee0bcd4690f, type: 3}
+  itemMesh: {fileID: -1195938968934217610, guid: 98318b7fbb6008a488a87d8f130a5b45,
+    type: 3}
+  itemMaterial: {fileID: 2100000, guid: 9d3dcfae311cd2f418047e848e3b45d8, type: 2}
+  itemDescription: "\uB179\uC0C9\uC73C\uB85C \uBE5B\uB098\uB294 \uB8EC\uC18C\uB4DC\uC774\uB2E4.\n\uAD49\uC7A5\uD788
+    \uB2E8\uB2E8\uD574 \uBCF4\uC778\uB2E4."
+  statModifiers:
+  - Type: 0
+    value: 15
+  - Type: 3
+    value: 20
+  - Type: 4
+    value: 5
+  - Type: 7
+    value: 6
+  equipType: 0

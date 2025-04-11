@@ -40,19 +40,22 @@ public class GameManager : MonoBehaviour
     private static T CreateManager<T>() where T : MonoBehaviour
     {
         GameObject go = new GameObject(typeof(T).Name);
+
         if (instance != null)
             go.transform.parent = instance.transform;
+
         T manager = go.AddComponent<T>();
+
         return manager;
     }
 
     private void CreateManagers()
     {
-        dataManager = CreateManager<DataManager>();
-        uiManager = CreateManager<UI_Manager>();
-        audioManager = CreateManager<AudioManager>();
-        inventoryManager = CreateManager<InventoryManager>();
-        calculator = CreateManager<CombatStatCalculator>();
-        equipmentManager = CreateManager<EquipmentManager>();
+        dataManager         = CreateManager<DataManager>();
+        uiManager           = CreateManager<UI_Manager>();
+        audioManager        = CreateManager<AudioManager>();
+        inventoryManager    = CreateManager<InventoryManager>();
+        calculator          = CreateManager<CombatStatCalculator>();
+        equipmentManager    = CreateManager<EquipmentManager>();
     }
 }

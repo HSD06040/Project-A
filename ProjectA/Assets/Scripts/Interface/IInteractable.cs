@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public void Interactable();
+    public void Interactive();
     public void Open();
 }

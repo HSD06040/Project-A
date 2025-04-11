@@ -15,6 +15,6 @@ public class SlimeBT : EnemyBT
 
     protected override void Start()
     {
-        base.Start();
+        base.Start();   
     }
 }

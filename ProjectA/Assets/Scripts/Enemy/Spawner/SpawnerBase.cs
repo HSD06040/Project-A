@@ -34,8 +34,8 @@ public class SpawnerBase : MonoBehaviour
     {
         if (currentEnemyCount >= maxEnemyCount) return;
 
+        currentEnemyCount++;
         GameObject newEnemy = Instantiate(enemy,transform.position,Quaternion.identity);
         newEnemy.GetComponent<SlimeBT>()?.SetUp(target, patrolPoints[currentEnemyCount].patrolPoint);
-        currentEnemyCount++;
     }
 }

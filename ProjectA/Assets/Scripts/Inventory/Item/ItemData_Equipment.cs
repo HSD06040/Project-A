@@ -26,7 +26,7 @@ public struct StatModifier
     public int value;
 }
 
-[CreateAssetMenu(fileName = "newItemData", menuName = "Data/EquipmentData")]
+[CreateAssetMenu(fileName = "newItemData", menuName = "Data/Item/EquipmentItem")]
 public class ItemData_Equipment : ItemData
 {
     [Header("Stat")]

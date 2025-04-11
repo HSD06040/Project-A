@@ -5,6 +5,14 @@ using static UnityEditor.Progress;
 
 public class EquipmentManager : MonoBehaviour
 {
+    private WeaponBase weapon;
+    private PlayerStats playerStat;
+    private void Awake()
+    {
+        playerStat  = GameManager.Data.playerStatData;
+        weapon      = playerStat.GetComponentInChildren<WeaponBase>();
+    }
+
     /// <summary>
     /// 아이템을 장착하고 아이템의 능력치를 추가하고 인벤토리에서 제거한다.
     /// </summary>
@@ -38,7 +46,8 @@ public class EquipmentManager : MonoBehaviour
         GameManager.Inventory.inv.equipmentDictionary.Add(item, newItem);
         item.AddModifiers();
         GameManager.Inventory.RemoveItem(item);
-        GameManager.Data.playerStatData.IncreaseHealth(item.GetMaxHealth());
+        weapon.SetupWeaponData(item);
+        playerStat.IncreaseHealth(item.GetMaxHealth());
     }
 
 

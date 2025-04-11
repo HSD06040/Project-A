@@ -22,7 +22,7 @@ public enum ItemType
     Equipment 
 }
 
-[CreateAssetMenu(fileName = "newItemData",menuName ="Data/ItemData")]
+[CreateAssetMenu(fileName = "newItemData",menuName ="Data/Item/BaseItem")]
 public class ItemData : ScriptableObject, IEquatable<ItemData>
 {
     public string itemName;

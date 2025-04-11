@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa645905810916418c34420f372ba05, type: 3}
+  m_Name: Burning Flame
+  m_EditorClassIdentifier: 
+  itemName: "\uD0C0\uC624\uB974\uB294 \uBD88\uAF43"
+  itemType: 1
+  itemGrade: 5
+  itemID: 4ba31c7ed08b87541b5d5ad225b20590
+  icon: {fileID: 21300000, guid: 56cdb01435272f64f923221450161d3b, type: 3}
+  itemMesh: {fileID: 1062120985105442271, guid: 57e71afe94c8e1e4d9b5a12c31bd1f83,
+    type: 3}
+  itemMaterial: {fileID: 2100000, guid: 5e852c0c6cb6946449056929e2b7270a, type: 2}
+  itemDescription: "\uD654\uC5FC\uC744 \uC0C1\uC9D5\uD558\uB294 \uAC80\uC774\uB2E4."
+  statModifiers:
+  - Type: 0
+    value: 66
+  - Type: 5
+    value: 21
+  - Type: 3
+    value: 40
+  - Type: 1
+    value: 15
+  equipType: 0

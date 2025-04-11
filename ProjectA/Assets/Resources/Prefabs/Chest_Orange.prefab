@@ -175,9 +175,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a46539f1b48b462408c297b52174477c, type: 2}
-  - {fileID: 2100000, guid: 9ceaa6473a7e0c14ba7a4b9bab4e10d6, type: 2}
-  - {fileID: 2100000, guid: 1da919cf6dae39041879b82489d3197b, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -397,19 +397,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactiveKey: {fileID: 917455120388647685}
-  paths:
-  - Assets/Data/Legendary
-  - Assets/Data/Unique
-  - Assets/Data/Epic
-  - Assets/Data/Rare
-  - Assets/Data/UnCommon
-  - Assets/Data/Common
   itemDatas: []
-  legendaryChance: 3
-  uniqueChance: 7
-  epicChance: 20
-  rareChance: 45
-  unCommonChance: 70
+  chestData: {fileID: 11400000, guid: 6a741b48599f13e4fa38fa9aa47d0788, type: 2}
+  upMeshRenderer: {fileID: 5516453098332211998}
+  bottomMeshRenderer: {fileID: 976214096576405688}
 --- !u!54 &1734394914087298224
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -543,9 +534,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9ceaa6473a7e0c14ba7a4b9bab4e10d6, type: 2}
-  - {fileID: 2100000, guid: a46539f1b48b462408c297b52174477c, type: 2}
-  - {fileID: 2100000, guid: 1da919cf6dae39041879b82489d3197b, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

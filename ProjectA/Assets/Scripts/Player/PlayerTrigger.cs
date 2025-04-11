@@ -13,7 +13,7 @@ public class PlayerTrigger : MonoBehaviour
         {
             isInteractive = true;
             interactiveObj = hit.GetComponent<IInteractable>();
-            interactiveObj.Interactable();
+            interactiveObj.Interactive();
         }
     }
     private void OnTriggerExit(Collider hit)
