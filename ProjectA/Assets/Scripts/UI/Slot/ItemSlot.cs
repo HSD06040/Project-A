@@ -48,8 +48,9 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (item.data == null)
+        if (item == null || item.data == null)
             return;
+
         toolTip.OpenToolTip(item);
     }
     public void OnPointerExit(PointerEventData eventData)
@@ -59,7 +60,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (item == null)
+        if (item == null || item.data == null)
             return;
 
         if(item.data.itemType == ItemType.Equipment)

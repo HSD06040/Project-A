@@ -20,14 +20,14 @@ public class CharacterStats : MonoBehaviour
 
     public EntityFX fx {  get; private set; }
 
-    private bool isAlive;
+    private bool isAlive = true;
     public bool IsAlive
     {
         get => isAlive;
         set
         {
             isAlive = value;
-            OnPlayerDead?.Invoke();
+            OnDead?.Invoke();
         }
     }
 
@@ -42,7 +42,7 @@ public class CharacterStats : MonoBehaviour
        }
     }
 
-    public event Action OnPlayerDead;
+    public event Action OnDead;
     public event Action<int> OnHealthChanged;
 
     protected virtual void Start()
@@ -81,6 +81,6 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Die()
     {
-        IsAlive = true;
+        IsAlive = false;
     }
 }

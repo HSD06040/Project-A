@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour
 
     private void CreateManagers()
     {
-        uiManager = CreateManager<UI_Manager>();
         dataManager = CreateManager<DataManager>();
+        uiManager = CreateManager<UI_Manager>();
         audioManager = CreateManager<AudioManager>();
         inventoryManager = CreateManager<InventoryManager>();
         calculator = CreateManager<CombatStatCalculator>();

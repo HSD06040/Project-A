@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Rendering.BuiltIn.ShaderGraph;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -19,7 +20,10 @@ public class InventoryManager : MonoBehaviour
         inv.inventoryDictionary = new Dictionary<ItemData, InventoryItem> (inventorySlot.Length);
         inv.equipment           = new List<InventoryItem> (equipmentSlot.Length);
         inv.equipmentDictionary = new Dictionary<ItemData_Equipment, InventoryItem>(equipmentSlot.Length);
+    }
 
+    private void Start()
+    {
         UpdateSlotUI();
     }
 
@@ -38,7 +42,9 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemData _data)
     {
-        inv.AddToInventory(_data);
+        if(CanAdd())
+            inv.AddToInventory(_data);
+
         UpdateSlotUI();
     }
     public void RemoveItem(ItemData _data)
@@ -75,9 +81,17 @@ public class InventoryManager : MonoBehaviour
         }
         for (int i = 0; i < inv.inventory.Count; i++)
         {
-            inventorySlot[i].UpdateSlot(inv.inventory[i]);
+            inventorySlot[i].UpdateSlot(inv.inventory[i]);  // index Error 예외처리
         }
 
         GameManager.UI.inventoryPanel.status.UpdateStatusUI();
+    }
+
+    public bool CanAdd()
+    {
+        if (inv.inventory.Count >= inventorySlot.Length)
+            return false;
+
+        return true;
     }
 }

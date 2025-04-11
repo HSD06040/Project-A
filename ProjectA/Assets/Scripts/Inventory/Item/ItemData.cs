@@ -1,9 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Progress;
+public enum ItemRarity
+{
+    Common,
+    UnCommon,
+    Rare,
+    Epic,
+    Unique,
+    Legendary
+}
 
 public enum ItemType 
 {   
@@ -15,16 +26,7 @@ public enum ItemType
 public class ItemData : ScriptableObject, IEquatable<ItemData>
 {
     public string itemName;
-    public enum ItemRarity
-    {
-        Common,
-        UnCommon,
-        Rare,
-        Epic,
-        Unique,
-        Legendary
-    }
-
+    
     public ItemType itemType;
     public ItemRarity itemGrade;
     public string itemID;
@@ -39,7 +41,7 @@ public class ItemData : ScriptableObject, IEquatable<ItemData>
     {
         {ItemRarity.Common, Color.gray },
         {ItemRarity.UnCommon, new Color(0.5f, 1f, 0.5f) }, // 연한 초록
-        {ItemRarity.Rare, Color.blue },
+        {ItemRarity.Rare, Color.cyan },
         {ItemRarity.Epic, Color.magenta },
         {ItemRarity.Unique, Color.yellow },
         {ItemRarity.Legendary, new Color(1f, 0.5f, 0f) } // 주황

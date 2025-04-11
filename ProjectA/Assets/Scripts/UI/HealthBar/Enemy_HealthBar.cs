@@ -11,14 +11,14 @@ public class Enemy_HealthBar : HealthBar
     {
         base.OnDisable();
 
-        stat.OnPlayerDead -= () => Invoke(nameof(HealthBarDisable), 1f);
+        stat.OnDead -= () => Invoke(nameof(HealthBarDisable), 1f);
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
 
-        stat.OnPlayerDead += () => Invoke(nameof(HealthBarDisable), 1f);
+        stat.OnDead += () => Invoke(nameof(HealthBarDisable), 1f);
     }
 
     private void HealthBarDisable() => this.gameObject.SetActive(false);

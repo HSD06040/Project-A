@@ -12,6 +12,9 @@ public class EquipmentManager : MonoBehaviour
     {
         if (item == null) return;
 
+        if (!GameManager.Inventory.CanAdd())
+            return;
+
         InventoryItem newItem = new InventoryItem(item);
         ItemData_Equipment oldItem = null;
 
@@ -46,7 +49,10 @@ public class EquipmentManager : MonoBehaviour
     {
         if (itemToRomove == null) return;
 
-        if(GameManager.Inventory.inv.equipmentDictionary.TryGetValue(itemToRomove,out InventoryItem value))
+        if (!GameManager.Inventory.CanAdd())
+            return;
+
+        if (GameManager.Inventory.inv.equipmentDictionary.TryGetValue(itemToRomove,out InventoryItem value))
         {
             GameManager.Inventory.inv.equipment.Remove(value);
             GameManager.Inventory.inv.equipmentDictionary.Remove(itemToRomove);
