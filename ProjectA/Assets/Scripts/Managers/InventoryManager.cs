@@ -36,6 +36,7 @@ public class InventoryManager : MonoBehaviour
             inventorySlot = parent.GetComponentsInChildren<ItemSlot>()
                       .Where(slot => slot.GetType() == typeof(ItemSlot))
                       .ToArray();
+
             equipmentSlot = parent.GetComponentsInChildren<Equipment_Slot>();
         }
     }
@@ -47,6 +48,7 @@ public class InventoryManager : MonoBehaviour
 
         UpdateSlotUI();
     }
+
     public void RemoveItem(ItemData _data)
     {
         if(inv.inventoryDictionary.TryGetValue(_data, out InventoryItem item))
@@ -64,6 +66,7 @@ public class InventoryManager : MonoBehaviour
 
         UpdateSlotUI();
     }
+
     public void UpdateSlotUI()
     {
         for (int i = 0; i < equipmentSlot.Length; i++)
