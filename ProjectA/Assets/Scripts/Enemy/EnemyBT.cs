@@ -1,12 +1,16 @@
+using System.Linq;
 using System.Security.Authentication.ExtendedProtection;
 using Unity.Behavior;
 using UnityEngine;
 
 public class EnemyBT : MonoBehaviour
 {
+    private Transform target;
+    private SpawnerBase spawner;
+
     protected BehaviorGraphAgent behaviorAgent;
     protected EnemyStats stat;
-    protected GameObject target;
+    protected GameObject targetObj;
     protected float currentDistance;
     protected virtual void Start()
     {
@@ -17,7 +21,7 @@ public class EnemyBT : MonoBehaviour
 
         behaviorAgent.GetVariable<GameObject>("Target", out BlackboardVariable<GameObject> targetValue);
 
-        target = targetValue;
+        targetObj = targetValue;
     }
 
     private void OnEnable()
@@ -55,5 +59,18 @@ public class EnemyBT : MonoBehaviour
                 behaviorAgent.SetVariableValue("currentState", EnemyState.Hit);
             }
         }
+    }
+    public void SetUp(Transform target, GameObject[] wayPoints, SpawnerBase spawner)
+    {
+        this.spawner = spawner;
+        this.target = target;
+
+        behaviorAgent.SetVariableValue("Patrol", wayPoints.ToList());
+        behaviorAgent.SetVariableValue("Target", this.target.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        spawner.MinusCurrentCount();
     }
 }

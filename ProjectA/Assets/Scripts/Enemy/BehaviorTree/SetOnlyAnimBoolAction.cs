@@ -18,7 +18,7 @@ public partial class SetOnlyAnimBoolAction : Action
         anim = Self.Value.GetComponent<Animator>();
         
         if(anim == null)
-            return Status.Success;
+            return Status.Running;
 
         foreach (AnimatorControllerParameter param in anim.parameters)
         {
@@ -30,7 +30,7 @@ public partial class SetOnlyAnimBoolAction : Action
 
         anim.SetBool(AnimBoolName, true);
 
-        return Status.Success;
+        return Status.Running;
     }
 }
 

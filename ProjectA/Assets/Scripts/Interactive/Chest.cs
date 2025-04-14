@@ -14,6 +14,8 @@ public class Chest : InteractiveObejct
     [SerializeField] private MeshRenderer upMeshRenderer;
     [SerializeField] private MeshRenderer bottomMeshRenderer;
 
+    private int itemCount;
+
     private void Awake()
     {
         Material[] upMats = upMeshRenderer.materials;
@@ -33,9 +35,9 @@ public class Chest : InteractiveObejct
     {
         base.Open();
 
-        for (int i = 0; i < UnityEngine.Random.Range(1, 3); i++)
+        SetupChest();
+        for (int i = 0; i < itemCount; i++)
         {
-            SetupChest();
             DropItem(itemDatas[UnityEngine.Random.Range(0, itemDatas.Count)]);
             keyAnim.SetBool("In", false);
             gameObject.tag = "Untagged";
@@ -62,7 +64,7 @@ public class Chest : InteractiveObejct
 
     private void SetupChest()
     {
-        int itemCount = Random.Range(1, 3);
+        itemCount = Random.Range(1, 4);
         int luck = GameManager.Data.playerStatData.luck.GetValue();
 
         for (int i = 0; i < itemCount; i++)

@@ -4046,7 +4046,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 59.04235
+  field of view: 57.48716
   orthographic: 0
   orthographic size: 12
   m_Depth: -1
@@ -13381,37 +13381,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231055333}
   m_CullTransparentMesh: 1
---- !u!1 &1239784493
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1239784494}
-  m_Layer: 0
-  m_Name: GameObject (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1239784494
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239784493}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1242196972
 GameObject:
   m_ObjectHideFlags: 0
@@ -15032,7 +15001,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1304049461}
   m_Lens:
-    FieldOfView: 59.04235
+    FieldOfView: 57.48716
     OrthographicSize: 12
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -19356,6 +19325,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3886978515993686579, guid: f3f7e16f86544f64e957a01fecf18693,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6065644133048105840, guid: f3f7e16f86544f64e957a01fecf18693,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19379,6 +19353,11 @@ PrefabInstance:
     - target: {fileID: 6318932522208580713, guid: f3f7e16f86544f64e957a01fecf18693,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318932522208580713, guid: f3f7e16f86544f64e957a01fecf18693,
+        type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6629404529619836101, guid: f3f7e16f86544f64e957a01fecf18693,
@@ -20208,12 +20187,7 @@ MonoBehaviour:
   spawnDuration: 3
   maxEnemyCount: 2
   currentEnemyCount: 0
-  patrolPoints:
-  - patrolPoint: []
-  - patrolPoint: []
-  - patrolPoint: []
-  - patrolPoint: []
-  - patrolPoint: []
+  patrolPoints: []
 --- !u!4 &1823238708
 Transform:
   m_ObjectHideFlags: 0
@@ -27419,4 +27393,3 @@ SceneRoots:
   - {fileID: 1823238708}
   - {fileID: 1732330947}
   - {fileID: 1987639443175844679}
-  - {fileID: 1239784494}
