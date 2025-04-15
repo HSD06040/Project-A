@@ -8,6 +8,4 @@ public class DataManager : MonoBehaviour
     {
         playerStatData = GameObject.Find("Player").GetComponent<PlayerStats>();
     }
-
-
 }

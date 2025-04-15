@@ -4046,7 +4046,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 57.48716
+  field of view: 57.34737
   orthographic: 0
   orthographic size: 12
   m_Depth: -1
@@ -15001,7 +15001,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1304049461}
   m_Lens:
-    FieldOfView: 57.48716
+    FieldOfView: 57.34737
     OrthographicSize: 12
     NearClipPlane: 0.3
     FarClipPlane: 1000

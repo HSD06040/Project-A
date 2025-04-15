@@ -12,10 +12,15 @@ public class EnemyBT : MonoBehaviour
     protected EnemyStats stat;
     protected GameObject targetObj;
     protected float currentDistance;
-    protected virtual void Start()
+
+    private void Awake()
     {
-        behaviorAgent = GetComponent<BehaviorGraphAgent>();
         stat = GetComponent<EnemyStats>();
+        behaviorAgent = GetComponent<BehaviorGraphAgent>();
+    }
+
+    protected virtual void Start()
+    {   
         stat.OnDead += SetIsAlive;
         stat.OnHealthChanged += _ => SetHit();
 
@@ -37,16 +42,16 @@ public class EnemyBT : MonoBehaviour
 
     private void Update()
     {
-        currentDistance = Vector3.Distance(transform.position, target.transform.position);
+        //currentDistance = Vector3.Distance(transform.position, target.transform.position);
 
-        if (currentDistance < 4)
-        {
-            behaviorAgent.SetVariableValue("isTargetDetected", true);
-        }
-        else
-        {
-            behaviorAgent.SetVariableValue("isTargetDetected", false);
-        }
+        //if (currentDistance < 4)
+        //{
+        //    behaviorAgent.SetVariableValue("isTargetDetected", true);
+        //}
+        //else
+        //{
+        //    behaviorAgent.SetVariableValue("isTargetDetected", false);
+        //}
     }   
 
     private void SetIsAlive() => behaviorAgent.SetVariableValue("isAlive", stat.IsAlive);

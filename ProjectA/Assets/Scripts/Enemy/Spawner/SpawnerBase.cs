@@ -13,9 +13,9 @@ public class SpawnerBase : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private Transform target;
     [SerializeField] private float spawnDuration;
-    [SerializeField] private int maxEnemyCount;
     private float spawnTimer;
-    private int currentEnemyCount;
+    [SerializeField] private int maxEnemyCount;
+    public int currentEnemyCount;
 
     [SerializeField] PatrolPoint[] patrolPoints;
 
@@ -38,5 +38,5 @@ public class SpawnerBase : MonoBehaviour
         GameObject newEnemy = Instantiate(enemy,transform.position,Quaternion.identity);
         newEnemy.GetComponent<EnemyBT>()?.SetUp(target, patrolPoints[currentEnemyCount].patrolPoint,this);
     }
-    public void MinusCurrentCount => currentEnemyCount--;
+    public void MinusCurrentCount() => currentEnemyCount--;
 }
