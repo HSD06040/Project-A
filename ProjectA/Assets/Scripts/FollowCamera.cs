@@ -21,6 +21,7 @@ public class FollowCamera : MonoBehaviour
     private Vector2 lookDelta;
     private float xRot;
     private float yRot;
+    private Quaternion targerRoatation;
 
     private void OnEnable()
     {
@@ -35,11 +36,13 @@ public class FollowCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        xRot -= lookDelta.y * mouseSensitivity * Time.deltaTime;
-        yRot += lookDelta.x * mouseSensitivity * Time.deltaTime;
+        xRot -= lookDelta.y * mouseSensitivity * Time.smoothDeltaTime;
+        yRot += lookDelta.x * mouseSensitivity * Time.smoothDeltaTime;
         xRot = Mathf.Clamp(xRot, -80, 80);
 
         cameraBoom.rotation = Quaternion.Euler(xRot, yRot, 0);
+        
+        //cameraBoom.rotation = Quaternion.Lerp(cameraBoom.rotation, q, 10);
     }
 
     private void OnLook(InputValue value)

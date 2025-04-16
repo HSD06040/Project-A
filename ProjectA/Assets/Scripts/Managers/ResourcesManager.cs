@@ -13,7 +13,7 @@ public class ResourcesManager : MonoBehaviour
 
     public T Instantiate<T> (T original, Vector3 position, Quaternion rotation) where T : Object
     {
-        GameObject go = GameManager.Pool.Get(original, position, rotation);
+        GameObject go = GameManager.Pool.Get(original as GameObject, position, rotation);
 
         return go as T;
     }

@@ -38,7 +38,7 @@ public class Player : Entity
         base.Awake();
         controller = GetComponent<CharacterController>();
         stateCon = GetComponent<PlayerStateController>();
-        stat = GetComponent<CharacterStats>();
+        stat = GetComponent<CharacterStats>(); 
     }
 
     protected override void Start()
@@ -66,11 +66,11 @@ public class Player : Entity
 
         camForward.y = 0;
         camRight.y = 0;
-
+        
         camForward.Normalize();
         camRight.Normalize();
 
-        camMoveDir = camForward * moveDir.z + camRight * moveDir.x;
+        camMoveDir = (camForward * moveDir.z + camRight * moveDir.x).normalized;
 
         Quaternion targetRotation = Quaternion.LookRotation(camMoveDir);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
