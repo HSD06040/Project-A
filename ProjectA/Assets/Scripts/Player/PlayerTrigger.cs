@@ -30,6 +30,9 @@ public class PlayerTrigger : MonoBehaviour
     private void Update()
     {
         if (isInteractive && Input.GetKeyDown(KeyCode.F))
+        {
             interactiveObj.Open();
+            isInteractive = false;
+        }
     }
 }

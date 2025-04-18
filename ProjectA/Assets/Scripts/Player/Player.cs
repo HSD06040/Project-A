@@ -15,6 +15,9 @@ public class Player : Entity
     public Vector2 input {  get; private set; }
     public Vector3 camMoveDir { get; private set; }
 
+    [Header("Attak info")]
+    public Transform[] slashTransform;
+
     [Header("Move info")]
     [HideInInspector] public Vector3 moveDir;
     public float dashSpeed;
@@ -99,7 +102,7 @@ public class Player : Entity
     /// </summary>
     private IEnumerator MoveTowardsEnemy(Transform enemyTransform)
     {
-        while (Vector3.Distance(transform.position, enemyTransform.position) > .7f)
+        while (Vector3.Distance(transform.position, enemyTransform.position) > 1.3f)
         {
             if (enemyTransform == null) break;
 

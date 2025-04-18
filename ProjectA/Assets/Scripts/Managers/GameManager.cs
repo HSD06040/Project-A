@@ -59,5 +59,6 @@ public class GameManager : MonoBehaviour
         inventoryManager    = CreateManager<InventoryManager>();
         calculator          = CreateManager<CombatStatCalculator>();
         equipmentManager    = CreateManager<EquipmentManager>();
+        poolManager         = CreateManager<PoolManager>();
     }
 }
