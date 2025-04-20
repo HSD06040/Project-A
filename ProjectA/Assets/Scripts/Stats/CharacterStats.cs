@@ -1,4 +1,5 @@
 using System;
+using System.Net.Mail;
 using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
@@ -54,6 +55,11 @@ public class CharacterStats : MonoBehaviour
     public void DoDamage(CharacterStats enemyStat, float attackPower = 1)
     {
         GameManager.Calculator.CalculateTotalDamage(this, enemyStat, attackPower);
+    }
+
+    public void TakeDamage(CharacterStats enemyStat, float attackPower = 1)
+    {
+        GameManager.Calculator.CalculateTotalDamage(enemyStat, this, attackPower);
     }
 
     public void DecreaseHealth(int amount,bool isCrit = false)
