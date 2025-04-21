@@ -9,18 +9,19 @@ public abstract class SkillBase : MonoBehaviour
     private Coroutine skillRoutine;
     private Animator anim => player.anim;
 
+    [SerializeField] private bool isGizmos;
     [SerializeField] private SkillOverlap overlap;
-    private OverlapType overlapType => overlap.overlapType;
 
     [Header("Skill damage data")]
-    [SerializeField] protected bool isTick;     // tick 스킬인지
-    [SerializeField] private float tickTime;   // tick 스킬이라면 몇초마다 데미지를 줄것인지
-    [SerializeField] private float duration;   // 스킬 지속시간
-    [SerializeField] private float damage;     // 스킬의 데미지
-    [SerializeField] private Vector3 distance;   // 스킬 거리
+    [SerializeField] protected bool isTick;         // tick 스킬인지
+    [SerializeField] private float tickTime;        // tick 스킬이라면 몇초마다 데미지를 줄것인지
+    [SerializeField] private float duration;        // 스킬 지속시간
+    [SerializeField] private float damage;          // 스킬의 데미지
+
+    [SerializeField] private float range;           // 판별할 범위 크기
+    [SerializeField] private Vector3 distance;      // 범위 거리
     [SerializeField] private Quaternion rotation;   // 범위 회전
-    [SerializeField] private float range;      // 판별할 범위
-    [SerializeField] private float delay;      // 데미지 판정이 스킬 시전 몇 초후에 시작될지
+    [SerializeField] private float delay;           // 데미지 판정이 스킬 시전 몇 초후에 시작될지
 
     [Header("Skill data")]
     [SerializeField] protected GameObject effect;
@@ -99,9 +100,9 @@ public abstract class SkillBase : MonoBehaviour
     {
         foreach (var hit in GetTargets())
         {
-            if (hit.TryGetComponent(out CharacterStats target))
+            if (hit.TryGetComponent(out IDamagable target))
             {
-                player.stat.DoDamage(target, damage);
+                target.TakeDamage(player.statCon, damage);
             }
         }
     }
@@ -110,17 +111,21 @@ public abstract class SkillBase : MonoBehaviour
     private void OnEndSkill() => anim.SetBool(animBool, false);
 
     private Collider[] GetTargets() { return overlap.GetOverlap(currentEffect.transform.position, distance, range, rotation); }
+
     protected void CreateEffect() { currentEffect = GameManager.Pool.Get(effect, transform.position, transform.rotation); }
+
     protected void CreateEffect(float delay)
     {
         StartCoroutine(DelayCreateEffect(transform.position, Quaternion.identity, delay));
     }
+
     private IEnumerator DelayCreateEffect(Vector3 position, Quaternion rotation, float delay)
     {
         yield return new WaitForSeconds(delay);
 
         currentEffect = GameManager.Pool.Get(effect, position, rotation);
     }
+
     private void DestroyEffect() { GameManager.Pool.Release(currentEffect); }
 
     private void OnDrawGizmos()
@@ -128,6 +133,10 @@ public abstract class SkillBase : MonoBehaviour
         if(overlap != null && currentEffect != null)
         {
             overlap.DrawGizmos(currentEffect.transform.position, distance, range, rotation);
+        }
+        if(isGizmos)
+        {
+            overlap.DrawGizmos(transform.position, distance, range, rotation);
         }
     }
 }

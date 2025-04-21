@@ -5,10 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Entity : MonoBehaviour
 {
-    #region Component
-    public Animator anim;
-
-    #endregion
+    [HideInInspector] public Animator anim;
 
     #region Physics
 

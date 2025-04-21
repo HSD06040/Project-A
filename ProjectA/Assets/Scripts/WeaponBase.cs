@@ -18,8 +18,8 @@ public class WeaponBase : MonoBehaviour
     {
         if(target.CompareTag("Enemy"))
         {
-            CharacterStats stat = target.GetComponent<CharacterStats>();
-            player.stat.DoDamage(stat, 1 + (player.stateCon.attackState.comboCount == 0 ? 0 : player.stateCon.attackState.comboCount / 5));
+            IDamagable damagable = target.GetComponent<IDamagable>();
+            damagable.TakeDamage(player.statCon, 1 + (player.stateCon.attackState.comboCount == 0 ? 0 : player.stateCon.attackState.comboCount / 5));
         }
     }
 

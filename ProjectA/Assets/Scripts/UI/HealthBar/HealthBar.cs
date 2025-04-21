@@ -11,9 +11,17 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private float lerpSpeed = 0.05f;
     [SerializeField] protected CharacterStats stat;
 
+    private void Start()
+    {
+        stat = GameManager.Data.playerStat;
+        stat.OnHealthChanged += UpdateHealthUI;
+        StartCoroutine(DelayUpdateUI(.1f));
+    }
+
     protected virtual void OnEnable()
     {
-        stat.OnHealthChanged += UpdateHealthUI;
+        if(stat != null)
+            stat.OnHealthChanged += UpdateHealthUI;
     }
 
     protected virtual void OnDisable()
@@ -29,10 +37,15 @@ public class HealthBar : MonoBehaviour
 
     protected virtual void UpdateHealthUI(int currentHealth)
     {
-        slider.maxValue = GameManager.Calculator.GetMaxHealth(stat.maxHealth.GetValue(),stat.vitality.GetValue(),stat.strength.GetValue());
-        slider.value = currentHealth;
+        slider.maxValue     = stat.maxHP;
+        slider.value        = currentHealth;
 
-        easeSlider.maxValue = GameManager.Calculator.GetMaxHealth(stat.maxHealth.GetValue(), stat.vitality.GetValue(), stat.strength.GetValue());
+        easeSlider.maxValue = stat.maxHP;
     }
-
+    
+    IEnumerator DelayUpdateUI(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        UpdateHealthUI(stat.CurrentHealth);
+    }
 }

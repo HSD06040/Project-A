@@ -9,7 +9,7 @@ public class Equipment_Slot : ItemSlot
     {
         if (item == null || item.data == null) return;
 
-        GameManager.Equip.UnEquipItem(item.data as ItemData_Equipment);
+        GameManager.Data.equipment.UnEquipItem(item.data as ItemData_Equipment);
         ClearSlot();
         toolTip.CloseToolTip();
     }

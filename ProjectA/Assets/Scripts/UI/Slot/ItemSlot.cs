@@ -65,7 +65,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         if(item.data.itemType == ItemType.Equipment)
         {
-            GameManager.Equip.EquipItem(item.data as ItemData_Equipment);
+            GameManager.Data.equipment.EquipItem(item.data as ItemData_Equipment);
         }
         else
         {

@@ -14,7 +14,20 @@ public class SwordSkill : SkillBase
 
     protected override IEnumerator PlaySkillRoutine()
     {
-        Instantiate(effect, transform.position, Quaternion.identity);
+        CreateEffect();
+
+        yield return waitDelay;
+
+        while (true)
+        {
+            DealDamageToTargets();
+
+            if (isTick)
+                yield return waitTickDelay;
+            else
+                break;
+        }
+
         yield return null;
     }
 }

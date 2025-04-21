@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class SlashSkill : SkillBase
+public class MagicSkill : SkillBase
 {
     protected override bool SkillCondition()
     {

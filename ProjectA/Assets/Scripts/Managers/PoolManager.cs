@@ -81,7 +81,7 @@ public class PoolManager : MonoBehaviour
         GameObject obj = instance as GameObject;
         string name = instance.name;
 
-        if (!poolDic.ContainsKey(name))
+        if (!poolDic.ContainsKey(name) && !obj.activeSelf)
             return;
         
         poolDic[name].Release(obj);

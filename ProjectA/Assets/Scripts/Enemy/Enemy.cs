@@ -7,22 +7,22 @@ public class Enemy : Entity
 {
     private Rigidbody rb;
     private Collider cd;
-    public CharacterStats stat;
+    public EnemyStats stat;
+    public EnemyStatController statCon;
     
     protected override void Awake()
     {
         base.Awake();
 
-        rb = GetComponent<Rigidbody>();
-        cd = GetComponent<Collider>();
-        stat = GetComponent<CharacterStats>();
+        rb      = GetComponent<Rigidbody>();
+        cd      = GetComponent<Collider>();
+        stat    = GetComponent<EnemyStats>();
+        statCon = GetComponent<EnemyStatController>();
     }
 
     protected override void Update()
     {
         base.Update();
-
-        
     }
 
 }

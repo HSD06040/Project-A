@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Stat
 {
     public int baseValue;
-    public List<int> modifiers;
+    public List<int> modifiers = new List<int>();
 
     public int GetValue()
     {

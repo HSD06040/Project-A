@@ -15,15 +15,17 @@ public class UI_Status : MonoBehaviour
 
     public void UpdateStatusUI()
     {
-        PlayerStats stat    = GameManager.Data.playerStatData;
-        damage.text         = GameManager.Calculator.GetDamage(GameManager.Data.playerStatData).ToString();
-        critChance.text     = GameManager.Calculator.GetCritChance(GameManager.Data.playerStatData).ToString();
-        critDamage.text     = GameManager.Calculator.GetCritDamage(GameManager.Data.playerStatData).ToString();
-        maxHealth.text      = GameManager.Calculator.GetMaxHealth(stat.maxHealth.GetValue(), stat.vitality.GetValue(), stat.strength.GetValue()).ToString();
-        defense.text        = GameManager.Calculator.GetDefense(GameManager.Data.playerStatData).ToString();
-        strength.text       = GameManager.Data.playerStatData.strength.GetValue().ToString();
-        agility.text        = GameManager.Data.playerStatData.agility.GetValue().ToString();
-        vitality.text       = GameManager.Data.playerStatData.vitality.GetValue().ToString();
-        luck.text           = GameManager.Data.playerStatData.luck.GetValue().ToString();
+        PlayerStats stat    = GameManager.Data.playerStat;
+
+        damage.text         = CombatStatCalculator.GetDamage    (stat).ToString();
+        critChance.text     = CombatStatCalculator.GetCritChance(stat).ToString();
+        critDamage.text     = CombatStatCalculator.GetCritDamage(stat).ToString();
+        maxHealth.text      = CombatStatCalculator.GetMaxHealth (stat.maxHealth.GetValue(), stat.vitality.GetValue(), stat.strength.GetValue()).ToString();
+        defense.text        = CombatStatCalculator.GetDefense   (stat).ToString();
+
+        strength.text       = GameManager.Data.playerStat.strength.GetValue().ToString();
+        agility.text        = GameManager.Data.playerStat.agility.GetValue().ToString();
+        vitality.text       = GameManager.Data.playerStat.vitality.GetValue().ToString();
+        luck.text           = GameManager.Data.playerStat.luck.GetValue().ToString();
     }
 }

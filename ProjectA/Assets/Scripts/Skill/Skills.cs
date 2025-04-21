@@ -6,14 +6,14 @@ public class Skills : MonoBehaviour
 
     #region skills
     public SwordSkill swordSkill { get; private set; }
-    public SlashSkill slashSkill { get; private set; }
+    public MagicSkill slashSkill { get; private set; }
 
     #endregion
     private void Awake()
     {
         player = GetComponentInParent<Player>();
         swordSkill = GetComponentInChildren<SwordSkill>();
-        slashSkill = GetComponentInChildren<SlashSkill>();
+        slashSkill = GetComponentInChildren<MagicSkill>();
 
         swordSkill.Init(player, "Sword");
         slashSkill.Init(player, "Sword");

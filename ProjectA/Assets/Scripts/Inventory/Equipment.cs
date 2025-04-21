@@ -1,18 +1,15 @@
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class EquipmentManager : MonoBehaviour
+public class Equipment : MonoBehaviour
 {
-    private WeaponBase weapon;
     private PlayerStats playerStat;
-    private void Awake()
-    {
-        playerStat  = GameManager.Data.playerStatData;
-        weapon      = playerStat.GetComponentInChildren<WeaponBase>();
-    }
 
+    private void Start()
+    {
+        playerStat = GameManager.Data.playerStat;
+    }
     /// <summary>
     /// 아이템을 장착하고 아이템의 능력치를 추가하고 인벤토리에서 제거한다.
     /// </summary>
@@ -20,14 +17,14 @@ public class EquipmentManager : MonoBehaviour
     {
         if (item == null) return;
 
-        if (!GameManager.Inventory.CanAdd())
+        if (!GameManager.Data.inventory.CanAdd())
             return;
 
         InventoryItem newItem = new InventoryItem(item);
         ItemData_Equipment oldItem = null;
 
         // 현재 장착중인 아이템을 숭회하며 만약 타입이 같다면 oldItem에 저장
-        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> _item in GameManager.Inventory.inv.equipmentDictionary)
+        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> _item in GameManager.Data.inventory.equipmentDictionary)
         {
             if (_item.Key.equipType == item.equipType)
             {
@@ -42,12 +39,13 @@ public class EquipmentManager : MonoBehaviour
             UnEquipItem(oldItem);
         }
 
-        GameManager.Inventory.inv.equipment.Add(newItem);
-        GameManager.Inventory.inv.equipmentDictionary.Add(item, newItem);
+        GameManager.Data.inventory.equipment.Add(newItem);
+        GameManager.Data.inventory.equipmentDictionary.Add(item, newItem);
         item.AddModifiers();
-        GameManager.Inventory.RemoveItem(item);
-        weapon.SetupWeaponData(item);
-        playerStat.IncreaseHealth(item.GetMaxHealth());
+        GameManager.Data.inventory.RemoveItem(item);
+        FindObjectOfType<WeaponBase>().SetupWeaponData(item);
+
+        playerStat.CurrentHealth += item.GetMaxHealth();
     }
 
 
@@ -58,16 +56,16 @@ public class EquipmentManager : MonoBehaviour
     {
         if (itemToRomove == null) return;
 
-        if (!GameManager.Inventory.CanAdd())
+        if (!GameManager.Data.inventory.CanAdd())
             return;
 
-        if (GameManager.Inventory.inv.equipmentDictionary.TryGetValue(itemToRomove,out InventoryItem value))
+        if (GameManager.Data.inventory.equipmentDictionary.TryGetValue(itemToRomove,out InventoryItem value))
         {
-            GameManager.Inventory.inv.equipment.Remove(value);
-            GameManager.Inventory.inv.equipmentDictionary.Remove(itemToRomove);
+            GameManager.Data.inventory.equipment.Remove(value);
+            GameManager.Data.inventory.equipmentDictionary.Remove(itemToRomove);
             itemToRomove.RemoveModifiers();
-            GameManager.Inventory.AddItem(itemToRomove);
-            GameManager.Data.playerStatData.DecreaseHealth(itemToRomove.GetMaxHealth());
+            GameManager.Data.inventory.AddItem(itemToRomove);
+            playerStat.CurrentHealth -= itemToRomove.GetMaxHealth();
         }
         
     }

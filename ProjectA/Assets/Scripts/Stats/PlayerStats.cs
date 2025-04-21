@@ -3,10 +3,24 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-    protected override void Start()
+    private void Awake()
     {
-        base.Start();
+        InitStat();
     }
+
+    private void InitStat()
+    {
+        damage = new Stat();
+        defense = new Stat();
+        critChance = new Stat();
+        critDamage = new Stat();
+        maxHealth = new Stat();
+        strength = new Stat();
+        vitality = new Stat();
+        agility = new Stat();
+        luck = new Stat();
+    }
+
     public Stat GetStat(StatType type)
     {
         return type switch
@@ -22,5 +36,5 @@ public class PlayerStats : CharacterStats
             StatType.Luck => luck,
             _ => throw new ArgumentException("Invalid stat type")
         };
-    }
+    } 
 }

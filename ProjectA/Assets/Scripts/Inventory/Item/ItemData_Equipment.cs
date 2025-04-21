@@ -86,14 +86,14 @@ public class ItemData_Equipment : ItemData
     {
         foreach (var modifier in statModifiers)
         {
-            GameManager.Data.playerStatData.GetStat(modifier.Type).AddModifier(modifier.value);
+            GameManager.Data.playerStat.GetStat(modifier.Type).AddModifier(modifier.value);
         }
     }
     public void RemoveModifiers()
     {
         foreach (var modifier in statModifiers)
         {
-            GameManager.Data.playerStatData.GetStat(modifier.Type).RemoveModifier(modifier.value);
+            GameManager.Data.playerStat.GetStat(modifier.Type).RemoveModifier(modifier.value);
         }
     }
 
@@ -115,6 +115,6 @@ public class ItemData_Equipment : ItemData
                 strength = modifier.value;
         }
 
-        return GameManager.Calculator.GetMaxHealth(maxHealth, vitality, strength);
+        return CombatStatCalculator.GetMaxHealth(maxHealth, vitality, strength);
     }
 }

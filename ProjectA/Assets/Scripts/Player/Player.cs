@@ -9,9 +9,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CharacterController))]
 public class Player : Entity
 {
-    public CharacterController controller {  get; private set; }
-    public PlayerStateController stateCon {  get; private set; }
-    public CharacterStats stat { get; private set; }
+    #region Component
+    [HideInInspector] public CharacterController controller {  get; private set; }
+    [HideInInspector] public PlayerStateController stateCon {  get; private set; }
+    [HideInInspector] public PlayerStatController statCon { get; private set; }
+    public PlayerStats stat {  get; private set; }
+    #endregion
     public Vector2 input {  get; private set; }
     public Vector3 camMoveDir { get; private set; }
 
@@ -39,13 +42,14 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-        controller = GetComponent<CharacterController>();
-        stateCon = GetComponent<PlayerStateController>();
-        stat = GetComponent<CharacterStats>(); 
+        controller  = GetComponent<CharacterController>();
+        stateCon    = GetComponent<PlayerStateController>();      
+        statCon     = GetComponent<PlayerStatController>();
     }
 
     protected override void Start()
     {
+        stat = GameManager.Data.playerStat;
         base.Start();
     }
 

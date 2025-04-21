@@ -31,9 +31,9 @@ public class ItemObject : MonoBehaviour
 
     public void PickupItem()
     {
-        if (GameManager.Inventory.CanAdd())
+        if (GameManager.Data.inventory.CanAdd())
         {
-            GameManager.Inventory.AddItem(itemData);
+            GameManager.Data.inventory.AddItem(itemData);
             Destroy(gameObject);
         }
     }

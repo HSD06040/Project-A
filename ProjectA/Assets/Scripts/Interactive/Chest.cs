@@ -65,7 +65,7 @@ public class Chest : InteractiveObejct
     private void SetupChest()
     {
         itemCount = Random.Range(1, 4);
-        int luck = GameManager.Data.playerStatData.luck.GetValue();
+        int luck = GameManager.Data.playerStat.luck.GetValue();
 
         for (int i = 0; i < itemCount; i++)
         {

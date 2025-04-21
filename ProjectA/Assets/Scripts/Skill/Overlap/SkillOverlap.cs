@@ -13,13 +13,14 @@ public class SkillOverlap
     [SerializeField] private float capsuleHeight;
     [SerializeField] private Vector3 boxRatio;
 
-    public Collider[] GetOverlap(Vector3 position, Vector3 distance, float radius, Quaternion rotation)
+    public Collider[] GetOverlap(Vector3 position, Vector3 distance, float radius, [UnityEngine.Internal.DefaultValue("Quaternion.identity")] Quaternion rotation)
     {
         return (overlapType) switch
         {
-            OverlapType.Capsule => CapsuleOverlap   (position + distance, capsuleHeight, radius, rotation * Vector3.up),
             OverlapType.Sphere  => SphereOverlap    (position + distance, radius),
-            OverlapType.Box     => BoxOverlap       (position + distance, radius, rotation)
+            OverlapType.Box     => BoxOverlap       (position + distance, radius, rotation),
+            OverlapType.Capsule => CapsuleOverlap   (position + distance, capsuleHeight, radius, rotation.eulerAngles),
+            _ => null
         };  
     }
 

@@ -21,10 +21,8 @@ public class EnemyAnimTrigger : MonoBehaviour
         {
             if(hit.CompareTag("Player"))
             {
-                Player player = hit.GetComponent<Player>();
-                enemy.stat.DoDamage(player.stat,attackPower);
-
-                player.stateCon.SetupKnockBackBool(1 == enemy.anim.GetInteger("AttackCount"),this.transform);
+                IDamagable damagable = hit.GetComponent<IDamagable>();
+                damagable.TakeDamage(enemy.statCon);
             }
         }
     }

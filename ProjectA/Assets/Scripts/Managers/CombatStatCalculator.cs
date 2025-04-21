@@ -3,41 +3,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatStatCalculator : MonoBehaviour
+public static class CombatStatCalculator
 {
     //Èû
-    private int strDamage = 2;
-    private int strMaxHealth = 4;
+    private static int strDamage = 2;
+    private static int strMaxHealth = 4;
             
     //¹ÎÃ¸   
-    private int agiDamage = 4;
-    private int agiCritDamage = 2;
+    private static int agiDamage = 4;
+    private static int agiCritDamage = 2;
 
     //È°·Â
-    private int vitMaxHealth = 6;
-    private int vitDefense = 1;
+    private static int vitMaxHealth = 6;
+    private static int vitDefense = 1;
 
     //Çà¿î
-    private int luckCritChance = 1;
+    private static int luckCritChance = 1;
 
-    public void CalculateTotalDamage(CharacterStats myStats, CharacterStats enemyStats, float attackPower)
+    public static void CalculateTotalDamage(CharacterStatController myStatCon, CharacterStatController enemyStatCon, float attackPower)
     {
         bool isCrit = false;
         float totalDamage;
 
-        totalDamage = GetDamage(myStats) * attackPower;
+        CharacterStats myStat = myStatCon.stat;
 
-        if (CanCrit(myStats))
+        totalDamage = GetDamage(myStat) * attackPower;
+
+        if (CanCrit(myStat))
         {
             isCrit = true;
-            totalDamage *= (GetCritDamage(myStats) / 100);
+            totalDamage *= (GetCritDamage(myStat) / 100);
         }
-        totalDamage = CheckTargetDefense(totalDamage, enemyStats);
+        totalDamage = CheckTargetDefense(totalDamage, enemyStatCon.stat);
 
-        enemyStats.DecreaseHealth((int)totalDamage,isCrit);
+        enemyStatCon.DecreaseHealth((int)totalDamage,isCrit);
     }
 
-    public bool CanCrit(CharacterStats myStats)
+    public static bool CanCrit(CharacterStats myStats)
     {
         if (GetCritChance(myStats) > UnityEngine.Random.Range(0, 100))
         {
@@ -46,7 +48,7 @@ public class CombatStatCalculator : MonoBehaviour
         return false;
     }
 
-    public float CheckTargetDefense(float totalDamage, CharacterStats enemyStats)
+    public static float CheckTargetDefense(float totalDamage, CharacterStats enemyStats)
     {
         totalDamage -= totalDamage * (GetDefense(enemyStats) / (GetDefense(enemyStats) + 50));
 
@@ -54,30 +56,30 @@ public class CombatStatCalculator : MonoBehaviour
     }
 
     #region Get Stats
-    public int GetDamage(CharacterStats Stats)
+    public static int GetDamage(CharacterStats Stats)
     {
         return Stats.damage.GetValue() +
               (Stats.strength.GetValue() * strDamage + Stats.agility.GetValue() * agiDamage);
     }
 
-    public float GetDefense(CharacterStats stats)
+    public static float GetDefense(CharacterStats stats)
     {
         return stats.defense.GetValue() +
                stats.vitality.GetValue() * vitDefense;
     }
 
-    public int GetMaxHealth(int maxHealth, int vitality, int strength)
+    public static int GetMaxHealth(int maxHealth, int vitality, int strength)
     {
         return maxHealth + (vitality * vitMaxHealth) + (strength * strMaxHealth);
     }
 
-    public int GetCritChance(CharacterStats stats)
+    public static int GetCritChance(CharacterStats stats)
     {
         return stats.critChance.GetValue() +
                stats.luck.GetValue() * luckCritChance;
     }
 
-    public int GetCritDamage(CharacterStats stats)
+    public static int GetCritDamage(CharacterStats stats)
     {
         return stats.critDamage.GetValue() +
                stats.agility.GetValue() * agiCritDamage;
